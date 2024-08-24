@@ -4,6 +4,7 @@ body {
     font-family: barlow, arial;
     background-color: #000;
     color: white;
+    max-width: 1200px;
     /* filter: brightness(0.8); */
 }
 
@@ -46,7 +47,7 @@ h1 {
 }
 
 h3 {
-    margin: 30px 0 -4px 0;
+    margin: 30px 0 5px 0;
     font-size: 1.4em;
     font-weight: 100;
 }
@@ -87,7 +88,7 @@ h3 {
     border-radius: var(--border-radius);
     background: #bbb;
     transition: background 0.2s;
-    margin: 10px 2px 0 2px;
+    margin: 0 2px;
 }
 
 .toggle-text {
@@ -132,15 +133,10 @@ h3 {
     margin-top: 4px;
 }
 
-#results-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .data-table {
     margin-top: 4px;
     border-collapse: collapse;
+    width: 100%;
 }
 
 .data-table th, .data-table td {

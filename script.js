@@ -165,8 +165,6 @@ document.querySelector("body").oninput = runAllCalcs;
 
 document.querySelector("#fuel-needed-result-type").addEventListener('click', () => convertLastCells());
 
-//make mobile responsive
-// make togggle button mobile clicks the right size
 // improve code effeciency
 //create save in browser functionality
 
