@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+        <link link href="styles.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	</HEAD>
+	<BODY>
+        <h1>Fuel Calculator</h1>
+        <p id="author">by Landon Lechner</p>
+        <div class="all-but-h1">
+            <section id="race-length-container">
+                <h3>Race Length</h3>
+                    <div id="race-length-time-text" class="toggle-text">Time</div>
+                    <label class="toggle">
+                        <input id="race-length-type" class="toggle__input" type="checkbox" unchecked>
+                        <div class="toggle__fill"></div>
+                    </label>
+                    <span id="race-length-laps-text" class="toggle-text">Laps</span>
+                        <div class="race-length-laps-elements" style="display:none">
+                            <input id="race-length-laps-value" class="number-box" type="number" value="20">
+                        </div>
+                        <div class="race-length-time-elements">
+                        <div class="slider-container">
+                            <div id="race-length-hours-text" class="slider-text">Hours</div>
+                            <input id="race-length-hours-value" class="slider" type="range" min="0" max="24" value="0">
+                        </div>
+                        <div class="slider-container">
+                            <div id="race-length-minutes-text" class="slider-text">Minutes</div>
+                            <input id="race-length-minutes-value" class="slider" type="range" min="0" max="59" value="30">
+                        </div>
+                        <div id="race-length-display">0:30</div>
+                    </div>
+                </section>
+                <section id="fuel-per-lap-container">
+                    <h3>Per Lap Fuel Usage</h3>
+                    <div id="fuel-per-lap-gallons-text" class="toggle-text">Gallons</div>
+                    <label class="toggle">
+                        <input id="fuel-per-lap-type" class="toggle__input" type="checkbox" unchecked>
+                        <div class="toggle__fill"></div>
+                    </label>
+                    <div id="fuel-per-lap-liters-text" class="toggle-text">Liters</div>
+                    <div>
+                        <div>
+                            <input id="fuel-per-lap-value" class="number-box" type="number" value="0.50" step="0.01">
+                        </div>
+                    </div>
+                </section>	
+                <section class="lap-time-container">
+                <div class="lap-time-elements">
+                <h3 class="lap-time-title">Average Lap Time of Fastest Driver in Race</h3>
+                        <div class="slider-container">
+                            <div class="slider-text">Minutes</div>
+                            <input class="slider" id="lap-time-minutes" type="range" min="0" max="9" value="1">
+                        </div>
+                        <div class="slider-container">
+                            <div class="slider-text">Seconds</div>
+                            <input class="slider" id="lap-time-seconds" type="range" min="0" max="59" value="30">
+                        </div>
+                        <div id="lap-time-display">1:30</div>
+                    </div>  
+                </section>
+                <div>
+                    <p></p>
+                    <button id="add-to-results-button" onclick="addRow()">Save Results & Add Row</button>
+                </div>
+                <section id="results-container">
+                <h3>Results</h3>
+                <div>
+                    <div id="results-gallons-text" class="toggle-text">Gallons</div> 
+                    <label class="toggle">
+                        <input id="fuel-needed-result-type" class="toggle__input" type="checkbox" unchecked>
+                        <div class="toggle__fill"></div>
+                    </label>
+                    <div id="results-liters-text" class="toggle-text">Liters</div>
+                </div>
+                <table id="data-table" id="results-title-container">
+                    <thead>
+                      <tr>
+                        <th class="results-label">Race Length</th>
+                        <th class="results-label">Total Laps</th>
+                        <th class="results-label">Fuel Needed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+            		    <td id="race-length-time-result" class="results-data"></td>
+            		    <td id="race-length-laps-result" class="results-data"></td>
+            		    <td id="fuel-needed-result" class="results-data"></td>
+                      </tr>
+                    </tbody>
+                </table>
+    		</section>
+		</div>
+        <script type="text/javascript" src="script.js"></script>
+	</BODY>
+</HTML> 
