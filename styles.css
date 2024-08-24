@@ -6,6 +6,7 @@ body {
     color: white;
     /* filter: brightness(0.8); */
     position: relative;
+    width: 100vw;
 }
 
 .all-but-h1 {
