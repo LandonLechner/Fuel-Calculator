@@ -5,8 +5,12 @@ body {
     background-color: #000;
     color: white;
     /* filter: brightness(0.8); */
+    max-width: 100%;
+
+}
+
+.alpha-container {
     position: relative;
-    width: 100vw;
 }
 
 .all-but-h1 {
@@ -18,6 +22,9 @@ body {
 }
 
 h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
     font-family: barlow;
     font-weight: 400;
     font-size: 8em;
@@ -57,12 +64,9 @@ h3 {
     margin-top: -3px;
 }
 
-/* #lap-time-display {
-    Margin-top: -5px;
-} */
-
 .lap-time-title {
     margin-bottom: 8px;
+    min-width: 100px;
 }
 
 .toggle {
