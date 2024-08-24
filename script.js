@@ -116,11 +116,11 @@ function convertLastCells () {
         if (fuelNeededType) {
             let myArray = allLastCells[i].innerText.split(" ");
             let justNumber = +myArray[0];
-            allLastCells[i].innerText = `${(justNumber * 3.78541).toFixed(2)} liters`;
+            allLastCells[i].innerText = `${(justNumber * 3.78541).toFixed(2)} Liters`;
         } else {
             let myArray = allLastCells[i].innerText.split(" ");
             let justNumber = +myArray[0];
-            allLastCells[i].innerText = `${(justNumber * 0.264172).toFixed(2)} gallons`;
+            allLastCells[i].innerText = `${(justNumber * 0.264172).toFixed(2)} Gallons`;
         }
         const deleteButton = document.createElement('div');
         deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
