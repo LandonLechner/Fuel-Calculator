@@ -133,7 +133,7 @@ function convertLastCells () {
 }
 
 function addRow() {
-    const table = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+    const table = document.querySelector('.data-table').getElementsByTagName('tbody')[0];
     const initialRow = table.rows[0];
     const newRow = table.insertRow(1); // Insert the new row right after the initial row
     
@@ -165,7 +165,10 @@ document.querySelector("body").oninput = runAllCalcs;
 
 document.querySelector("#fuel-needed-result-type").addEventListener('click', () => convertLastCells());
 
-// //create save in browser functionality
+//make mobile responsive
+// make togggle button mobile clicks the right size
+// improve code effeciency
+//create save in browser functionality
 
 
 

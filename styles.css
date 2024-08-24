@@ -1,57 +1,61 @@
-body { 
-    margin: 0; 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
     box-sizing: border-box;
     font-family: barlow, arial;
     background-color: #000;
     color: white;
-    /* filter: brightness(0.8); */
-    max-width: 100%;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    padding: 20px; /* Optional: To prevent content from touching edges */
+    text-align: center; /* Center text by default */
+    filter: brightness(0.8);
 }
 
 .alpha-container {
-    position: relative;
-}
-
-.all-but-h1 {
     display: flex;
-    align-items: center;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Optional: Limit max width for readability */
 }
 
-h1 {
+/* h1 {
     position: absolute;
-    top: 0;
-    left: 0;
     font-family: barlow;
     font-weight: 400;
     font-size: 8em;
-    position: fixed;
     letter-spacing: -0.14em;
     color: #222;
     z-index: -1;
     rotate: -90deg;
-    transform: translateX(-275px) translateY(-235px) skewX(-15deg);
+    /* transform: translateX(-275px) translateY(-235px) skewX(-15deg); */
+    /* transform: skewX(-15deg);
     text-wrap: nowrap;
     margin: 0;
-    padding-top: -20px;
-}
+} */
 
 #author {
+    position: absolute;;
     font-family: barlow;
     font-size: 1.5em;
-    position: fixed;
     letter-spacing: -0.1em;
     color: #222;
     z-index: -1;
     rotate: -90deg;
-    transform: translateX(-165px) translateY(27px) skewX(-15deg);
+    /* transform: translateX(-165px) translateY(27px) skewX(-15deg); */
+    transform: skewX(-15deg);
     text-wrap: nowrap;
-    margin: 0;
-    padding-top: -20px;
-}
+    align-items: flex-start;
+} */
 
 h3 {
     margin: 30px 0 -4px 0;
@@ -140,23 +144,32 @@ h3 {
     margin-top: 4px;
 }
 
-#data-table {
+/* Make results container centered */
+#results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width for mobile */
+    max-width: 600px; /* Optional: limit max width for readability */
+}
+
+.data-table {
     margin-top: 4px;
-    max-width: 800px;
     border-collapse: collapse;
 }
 
-#data-table th, #data-table td {
+.data-table th, .data-table td {
     padding: 4px 15px;
     text-align: center;
 }
 
-#data-table th {
+.data-table th {
     font-weight: 100;
     font-size: 1.2em;
 }
 
-#data-table td {
+.data-table td {
     border-top: 1px solid #fff;
 }
 
@@ -218,4 +231,24 @@ input {
 .color-gray {
     color: #444;
     transition: color 0.3s linear;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .alpha-container, #results-container {
+        max-width: 90%; /* More flexible width on mobile */
+    }
+
+    h1, #author, h3, #race-length-display, #lap-time-display {
+        font-size: 1.2em; /* Adjust font sizes for smaller screens */
+    }
+
+    #add-to-results-button {
+        width: 100%; /* Make the button full width on mobile */
+        padding: 10px;
+    }
 }
