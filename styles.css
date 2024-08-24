@@ -1,35 +1,23 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
+body { 
+    margin: 0; 
     box-sizing: border-box;
     font-family: barlow, arial;
     background-color: #000;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Full viewport height */
-    padding: 20px; /* Optional: To prevent content from touching edges */
-    text-align: center; /* Center text by default */
-    filter: brightness(0.8);
+    /* filter: brightness(0.8); */
 }
 
 .alpha-container {
     display: flex;
+    position: relative;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px; /* Optional: Limit max width for readability */
+    text-align: center;
 }
 
-/* h1 {
-    position: absolute;
+h1 {
+    position: fixed;
     font-family: barlow;
     font-weight: 400;
     font-size: 8em;
@@ -37,25 +25,25 @@ body {
     color: #222;
     z-index: -1;
     rotate: -90deg;
-    /* transform: translateX(-275px) translateY(-235px) skewX(-15deg); */
-    /* transform: skewX(-15deg);
+    transform: skewX(-15deg);
     text-wrap: nowrap;
-    margin: 0;
-} */
+    left: -235px;
+    top: 180px;
+}
 
 #author {
-    position: absolute;;
+    position: fixed;
     font-family: barlow;
     font-size: 1.5em;
     letter-spacing: -0.1em;
     color: #222;
     z-index: -1;
     rotate: -90deg;
-    /* transform: translateX(-165px) translateY(27px) skewX(-15deg); */
     transform: skewX(-15deg);
     text-wrap: nowrap;
-    align-items: flex-start;
-} */
+    top: 131px;
+    left: 25px;
+}
 
 h3 {
     margin: 30px 0 -4px 0;
@@ -144,14 +132,10 @@ h3 {
     margin-top: 4px;
 }
 
-/* Make results container centered */
 #results-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%; /* Full width for mobile */
-    max-width: 600px; /* Optional: limit max width for readability */
 }
 
 .data-table {
@@ -231,24 +215,4 @@ input {
 .color-gray {
     color: #444;
     transition: color 0.3s linear;
-}
-
-/* Responsive adjustments for mobile devices */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .alpha-container, #results-container {
-        max-width: 90%; /* More flexible width on mobile */
-    }
-
-    h1, #author, h3, #race-length-display, #lap-time-display {
-        font-size: 1.2em; /* Adjust font sizes for smaller screens */
-    }
-
-    #add-to-results-button {
-        width: 100%; /* Make the button full width on mobile */
-        padding: 10px;
-    }
 }
