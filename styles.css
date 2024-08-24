@@ -4,17 +4,17 @@ body {
     font-family: barlow, arial;
     background-color: #000;
     color: white;
-    max-width: 1200px;
+    max-width: 1600px;
     /* filter: brightness(0.8); */
 }
 
 .alpha-container {
     display: flex;
-    position: relative;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    position: relative;
 }
 
 h1 {
@@ -29,7 +29,8 @@ h1 {
     transform: skewX(-15deg);
     text-wrap: nowrap;
     left: -235px;
-    top: 180px;
+    top: 250px;
+    margin: 0;
 }
 
 #author {
@@ -42,24 +43,39 @@ h1 {
     rotate: -90deg;
     transform: skewX(-15deg);
     text-wrap: nowrap;
-    top: 131px;
     left: 25px;
+    top: 140px;
+    margin: 0;
 }
 
 h3 {
     margin: 30px 0 5px 0;
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: 100;
 }
 
-#race-length-display, #lap-time-display{
+.under-slider-numbers {
     text-align: center;
     margin-top: -3px;
+    font-size: 1.2em;
 }
 
 .lap-time-title {
     margin-bottom: 8px;
     min-width: 100px;
+}
+
+.slider-text {
+    width: 66px;
+    display: inline-block;
+    text-align: right;
+    transform: translateY(-7px);
+    font-size: 1.1em;
+}
+
+.toggle-text {
+    display: inline-block;
+    transform: translateY(-5px);
 }
 
 .toggle {
@@ -91,11 +107,6 @@ h3 {
     margin: 0 2px;
 }
 
-.toggle-text {
-    display: inline-block;
-    transform: translateY(-5px);
-}
-
 .toggle__fill::after {
     content: "";
     position: absolute;
@@ -122,15 +133,10 @@ h3 {
     width: 200px;
 }
 
-.slider-text {
-    display: inline-block;
-    transform: translateY(-7px);
-    margin-right: 5px;
-}
-
 .number-box {
     width: 70px;
     margin-top: 4px;
+    font-size: 1.1em;
 }
 
 .data-table {
@@ -146,19 +152,16 @@ h3 {
 
 .data-table th {
     font-weight: 100;
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 .data-table td {
     border-top: 1px solid #fff;
+    font-size: 1.1em;
 }
 
 .last-cell {
     position: relative;
-}
-
-input {
-    height: 20px;
 }
 
 .delete-button {
@@ -170,43 +173,28 @@ input {
 }
 
 #add-to-results-button {
-    background-color: #de3a0d; /* Blue background */
-    border: none; /* Remove default border */
-    color: white; /* White text */
-    padding: 7px 30px; /* Padding around the text */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline from links */
-    display: inline-block; /* Align with other elements */
-    font-size: 16px; /* Increase font size */
-    margin: 10px 2px 0; /* Space around the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 3px; /* Rounded corners */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    background-color: #de3a0d;
+    border: none;
+    color: white;
+    padding: 7px 30px;
+    text-align: center;
+    font-size: 1em;
+    margin: 10px 2px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s, transform 0.3s;
     font-family: barlow;
 }
 
-/* Hover effect */
 #add-to-results-button:hover {
-    background-color: #be330d; /* Darker blue on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #be330d;
+    transform: scale(1.05);
 }
 
-/* Active state */
 #add-to-results-button:active {
-    background-color: #a62603; /* Even darker blue when clicked */
-    transform: scale(0.98); /* Slightly shrink when clicked */
+    background-color: #a62603;
+    transform: scale(0.95);
 }
-
-/* Disabled state */
-#add-to-results-button:disabled {
-    background-color: #95a5a6; /* Gray background */
-    cursor: not-allowed; /* Not-allowed cursor */
-    transform: none; /* No transform effect */
-}
-/* 
-.color-white {
-    color: white;
-} */
 
 .color-gray {
     color: #444;
