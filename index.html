@@ -10,7 +10,7 @@
 	<BODY>
         <div class="alpha-container">
         <h1>Fuel Calculator</h1>
-        <p id="author">by Landon Lechner</p>
+        <!-- <p id="author">by Landon Lechner</p> -->
         <div class="all-but-h1">
             <section id="race-length-container">
                 <h3>Race Length</h3>
@@ -24,7 +24,7 @@
                             <input id="race-length-laps-value" class="number-box" type="number" value="20">
                         </div>
                         <div class="race-length-time-elements">
-                        <div class="slider-container">
+                        <div class="slider-container slider-top">
                             <div id="race-length-hours-text" class="slider-text">Hours</div>
                             <input id="race-length-hours-value" class="slider" type="range" min="0" max="24" value="0">
                         </div>
@@ -52,9 +52,10 @@
                 <section class="lap-time-container">
                     <div class="lap-time-elements">
                     <h3 class="lap-time-title">Average Lap Time of Fastest Driver in Race</h3>
-                        <div class="slider-container">
+                        <div class="slider-container slider-top">
                             <div class="slider-text">Minutes</div>
                             <input class="slider" id="lap-time-minutes" type="range" min="0" max="9" value="1">
+                            <!-- <div id="lengthMinsValueIndicator" class="value-indicator"></div> -->
                         </div>
                         <div class="slider-container">
                             <div class="slider-text">Seconds</div>
