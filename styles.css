@@ -24,8 +24,7 @@ h1 {
     font-weight: 400;
     font-size: 8em;
     letter-spacing: -0.14em;
-    color: #222;
-    z-index: -1;
+    color: #333;
     rotate: -90deg;
     transform: skewX(-15deg);
     text-wrap: nowrap;
@@ -33,6 +32,11 @@ h1 {
     top: 250px;
     margin: 0;
     filter: blur(4px);
+    transition: filter 1s;
+}
+
+h1:hover {
+    filter: blur(0px);
 }
 
 #author {
@@ -40,14 +44,19 @@ h1 {
     font-family: barlow;
     font-size: 1.5em;
     /* letter-spacing: -0.1em; */
-    color: #222;
-    z-index: -1;
+    color: #333;
     rotate: -90deg;
     transform: skewX(-15deg);
     text-wrap: nowrap;
     left: 6px;
     top: 158px;
     margin: 0;
+    filter: opacity(100%) blur(4px);
+    transition: filter 1s;
+}
+
+#author:hover {
+    filter: opacity(100%) blur(0px);
 }
 
 h3 {
@@ -136,7 +145,7 @@ h3 {
 }
 
 .slider-top {
-    margin: 10px 0 5px;
+    margin: 10px 0;
 }
 
 .number-box {
@@ -212,4 +221,14 @@ h3 {
 .color-gray {
     color: #444;
     transition: color 0.3s linear;
+}
+
+@media screen and (max-width: 656px) {
+    h1 {
+        z-index: -10;
+    }
+
+    #author {
+        filter: opacity(0%);
+    }
 }
