@@ -242,7 +242,7 @@ h3 {
     backdrop-filter: blur(4px);
 }
 
-@media screen and (width < 656px) {
+@media screen and (max-width: 700px) {
     h1 {
         z-index: -10;
     }
