@@ -248,7 +248,7 @@ h3 {
     }
 
     #author {
-        filter: opacity(0%);
+        visibility: hidden;
     }
 
     .value-indicator {
