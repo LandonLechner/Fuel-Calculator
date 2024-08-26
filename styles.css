@@ -4,7 +4,6 @@ body {
     font-family: barlow, arial;
     background-color: #000;
     color: white;
-    height: 100vh;
     max-width: 1600px;
     filter: brightness(0.8)
 }   
@@ -144,6 +143,10 @@ h3 {
     width: 200px;
 }
 
+.slider-container {
+    position: relative;
+}
+
 .slider-top {
     margin: 10px 0;
 }
@@ -223,12 +226,33 @@ h3 {
     transition: color 0.3s linear;
 }
 
-@media screen and (max-width: 656px) {
+.value-indicator {
+    position: absolute;
+    bottom: 30px;
+    right: calc(50% - 25px);
+    width: 30px;
+    text-align: center;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #555;
+    font-size: 1.6em;
+    display: none;
+    pointer-events: none;
+    filter: opacity(0%);
+}
+
+@media screen and (width < 656px) {
     h1 {
         z-index: -10;
     }
 
     #author {
         filter: opacity(0%);
+    }
+
+    .value-indicator {
+        filter: opacity(100%);
     }
 }

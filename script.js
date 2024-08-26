@@ -156,5 +156,58 @@ initializeToggleTexts();
 document.querySelector("body").oninput = runAllCalcs;
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
+
+document.querySelector('#race-length-hours-value').addEventListener('input', (event) => {
+    document.querySelector('#race-length-hours-value ~ div').textContent = event.target.value;
+    document.querySelector('#race-length-hours-value ~ div').style.display = 'block';
+});
+
+document.querySelector('#race-length-hours-value').addEventListener('mouseleave', () => {
+    document.querySelector('#race-length-hours-value ~ div').style.display = 'none';
+});
+
+document.querySelector('#race-length-hours-value').addEventListener('mouseup', () => {
+    document.querySelector('#race-length-hours-value ~ div').style.display = 'none';
+});
+
+document.querySelector('#race-length-minutes-value').addEventListener('input', (event) => {
+    document.querySelector('#race-length-minutes-value ~ div').textContent = event.target.value;
+    document.querySelector('#race-length-minutes-value ~ div').style.display = 'block';
+});
+
+document.querySelector('#race-length-minutes-value').addEventListener('mouseleave', () => {
+    document.querySelector('#race-length-minutes-value ~ div').style.display = 'none';
+});
+
+document.querySelector('#race-length-minutes-value').addEventListener('mouseup', () => {
+    document.querySelector('#race-length-minutes-value ~ div').style.display = 'none';
+});
+
+document.querySelector('#lap-time-minutes').addEventListener('input', (event) => {
+    document.querySelector('#lap-time-minutes ~ div').textContent = event.target.value;
+    document.querySelector('#lap-time-minutes ~ div').style.display = 'block';
+});
+
+document.querySelector('#lap-time-minutes').addEventListener('mouseleave', () => {
+    document.querySelector('#lap-time-minutes ~ div').style.display = 'none';
+});
+
+document.querySelector('#lap-time-minutes').addEventListener('mouseup', () => {
+    document.querySelector('#lap-time-minutes ~ div').style.display = 'none';
+});
+
+document.querySelector('#lap-time-seconds').addEventListener('input', (event) => {
+    document.querySelector('#lap-time-seconds ~ div').textContent = event.target.value;
+    document.querySelector('#lap-time-seconds ~ div').style.display = 'block';
+});
+
+document.querySelector('#lap-time-seconds').addEventListener('mouseleave', () => {
+    document.querySelector('#lap-time-seconds ~ div').style.display = 'none';
+});
+
+document.querySelector('#lap-time-seconds').addEventListener('mouseup', () => {
+    document.querySelector('#lap-time-seconds ~ div').style.display = 'none';
+});
+
 // improve code effeciency
 //create save in browser functionality
