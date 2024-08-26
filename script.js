@@ -25,6 +25,13 @@ const allLastCells = document.getElementsByClassName("last-cell");
 let fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
 let raceLengthType = document.querySelector("#race-length-type").checked;
 
+function initializeToggleTexts () {
+    raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
+    raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
+    resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
+    resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
+}
+
 function calcRaceLengthMins () {
     let raceLengthHours = +document.querySelector("#race-length-hours-value").value;
     let raceLengthMinutes = +document.querySelector("#race-length-minutes-value").value;
@@ -94,6 +101,23 @@ function runAllCalcs() {
     raceLengthLapsElements.style.display = raceLengthType ? "block" : "none";
 }
 
+function showFloatingValue(selector, type) {
+    const inputElement = document.querySelector(selector);
+    const floatingDiv = document.querySelector(`${selector} ~ div`);
+
+    inputElement.addEventListener('input', (event) => {
+        floatingDiv.textContent = `${event.target.value} ${type}`;
+        floatingDiv.style.display = 'block';
+    });
+
+    const hideFloatingValue = () => {
+        floatingDiv.style.display = 'none';
+    };
+
+    inputElement.addEventListener('touchend', hideFloatingValue);
+    inputElement.addEventListener('mouseup', hideFloatingValue);
+}
+
 function convertLastCells () {
     fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
     resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
@@ -143,36 +167,11 @@ function deleteRow(button) {
     row.remove();
 }
 
- function initializeToggleTexts () {
-    raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
-    raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
-    resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
-    resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
-}
-
 runAllCalcs();
 initializeToggleTexts();
 
 document.querySelector("body").oninput = runAllCalcs;
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
-
-
-function showFloatingValue(selector, type) {
-    const inputElement = document.querySelector(selector);
-    const floatingDiv = document.querySelector(`${selector} ~ div`);
-
-    inputElement.addEventListener('input', (event) => {
-        floatingDiv.textContent = `${event.target.value} ${type}`;
-        floatingDiv.style.display = 'block';
-    });
-
-    const hideFloatingValue = () => {
-        floatingDiv.style.display = 'none';
-    };
-
-    inputElement.addEventListener('touchend', hideFloatingValue);
-    inputElement.addEventListener('mouseup', hideFloatingValue);
-}
 
 showFloatingValue('#race-length-hours-value', 'hours');
 showFloatingValue('#race-length-minutes-value', 'minutes');
