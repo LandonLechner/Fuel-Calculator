@@ -157,10 +157,6 @@ h3 {
     font-size: 1.1em;
 }
 
-#race-length-container {
-    margin-top: -10px;
-}
-
 .results-container {
     margin: 10px;
 }
@@ -229,15 +225,15 @@ h3 {
 .value-indicator {
     position: absolute;
     bottom: 30px;
-    right: calc(50% - 25px);
-    width: 30px;
+    right: calc(50% - 100px);
+    width: 150px;
     text-align: center;
     padding: 5px 10px;
     background-color: rgba(0, 0, 0, 0.85);
     color: #fff;
     border-radius: 4px;
     border: 1px solid #555;
-    font-size: 1.6em;
+    font-size: 1.8em;
     display: none;
     pointer-events: none;
     filter: opacity(0%);

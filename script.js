@@ -157,12 +157,12 @@ document.querySelector("body").oninput = runAllCalcs;
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
 
-function showFloatingValue(selector) {
+function showFloatingValue(selector, type) {
     const inputElement = document.querySelector(selector);
     const floatingDiv = document.querySelector(`${selector} ~ div`);
 
     inputElement.addEventListener('input', (event) => {
-        floatingDiv.textContent = event.target.value;
+        floatingDiv.textContent = `${event.target.value} ${type}`;
         floatingDiv.style.display = 'block';
     });
 
@@ -174,10 +174,10 @@ function showFloatingValue(selector) {
     inputElement.addEventListener('mouseup', hideFloatingValue);
 }
 
-showFloatingValue('#race-length-hours-value');
-showFloatingValue('#race-length-minutes-value');
-showFloatingValue('#lap-time-minutes');
-showFloatingValue('#lap-time-seconds');
+showFloatingValue('#race-length-hours-value', 'hours');
+showFloatingValue('#race-length-minutes-value', 'minutes');
+showFloatingValue('#lap-time-minutes', 'minutes');
+showFloatingValue('#lap-time-seconds', 'seconds');
 
 // improve code effeciency
 //create save in browser functionality
