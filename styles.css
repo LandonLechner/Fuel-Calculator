@@ -6,7 +6,6 @@ body {
     justify-content: center;
     background-color: #000;
     color: white;
-    max-width: 1600px;
     filter: brightness(0.8)
 }   
 
@@ -17,10 +16,11 @@ body {
     justify-content: center;
     text-align: center;
     position: relative;
+    width: max(1600px);
 }
 
 h1 {
-    position: fixed;
+    position: absolute;
     font-family: barlow;
     font-weight: 400;
     font-size: 8em;
@@ -41,7 +41,7 @@ h1:hover {
 }
 
 #author {
-    position: fixed;
+    position: absolute;
     font-family: barlow;
     font-size: 1.5em;
     /* letter-spacing: -0.1em; */
@@ -238,7 +238,8 @@ h3 {
     font-size: 1.8em;
     display: none;
     pointer-events: none;
-    filter: opacity(0%);
+    visibility: hidden;
+    /* backdrop-filter: blur(10px); */
 }
 
 @media screen and (width < 656px) {
@@ -251,6 +252,6 @@ h3 {
     }
 
     .value-indicator {
-        filter: opacity(100%);
+        visibility: visible;
     }
 }
