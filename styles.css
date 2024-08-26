@@ -224,7 +224,7 @@ h3 {
 
 .value-indicator {
     position: absolute;
-    bottom: 30px;
+    bottom: 75px;
     right: calc(50% - 100px);
     width: 150px;
     text-align: center;
