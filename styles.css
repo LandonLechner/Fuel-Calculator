@@ -226,23 +226,23 @@ h3 {
 
 .value-indicator {
     position: absolute;
-    bottom: 75px;
-    right: calc(50% - 100px);
-    width: 150px;
+    bottom: 60px;
+    right: calc(50% - 90px);
+    width: 180px;
     text-align: center;
     padding: 5px 10px;
-    background-color: rgba(46, 113, 220, 0.94);
+    background-color: rgba(46, 113, 220, 0.9);
     color: #fff;
     border-radius: 3px;
     border: 1px solid #63a2d4;
-    font-size: 1.8em;
+    font-size: 2.2em;
     display: none;
     pointer-events: none;
     visibility: hidden;
     backdrop-filter: blur(4px);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
     h1 {
         z-index: -10;
     }

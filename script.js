@@ -106,7 +106,7 @@ function showFloatingValue(selector, type) {
     const floatingDiv = document.querySelector(`${selector} ~ div`);
 
     inputElement.addEventListener('input', (event) => {
-        floatingDiv.textContent = `${event.target.value} ${type}`;
+        floatingDiv.textContent = `${event.target.value} ${type}${event.target.value == 1 ? "" : "s"}`;
         floatingDiv.style.display = 'block';
     });
 
@@ -173,10 +173,10 @@ initializeToggleTexts();
 document.querySelector("body").oninput = runAllCalcs;
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
-showFloatingValue('#race-length-hours-value', 'hours');
-showFloatingValue('#race-length-minutes-value', 'minutes');
-showFloatingValue('#lap-time-minutes', 'minutes');
-showFloatingValue('#lap-time-seconds', 'seconds');
+showFloatingValue('#race-length-hours-value', 'hour');
+showFloatingValue('#race-length-minutes-value', 'minute');
+showFloatingValue('#lap-time-minutes', 'minute');
+showFloatingValue('#lap-time-seconds', 'second');
 
 // improve code effeciency
 //create save in browser functionality
