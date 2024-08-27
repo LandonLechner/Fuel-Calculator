@@ -25,6 +25,13 @@ const allLastCells = document.getElementsByClassName("last-cell");
 let fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
 let raceLengthType = document.querySelector("#race-length-type").checked;
 
+const floatingValueText = [
+    { selector: '#race-length-hours-value', unit: 'hour' },
+    { selector: '#race-length-minutes-value', unit: 'minute' },
+    { selector: '#lap-time-minutes', unit: 'minute' },
+    { selector: '#lap-time-seconds', unit: 'second' },
+];
+
 function initializeToggleTexts () {
     raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
     raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
@@ -72,13 +79,11 @@ function calcFuelPerLap() {
     return fuelPerLap;
 }
 
-function calcTotalFuelNeededTime(fuelNeededType) {
-    const fuelNeeded = Math.ceil(totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap;
-    fuelNeededResult.innerText = `${(fuelNeeded * (fuelNeededType ? toLitersConversion : 1)).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
-}
+function calcFuelTotalFuelNeeded (fuelNeededType, boolean) {
+    const fuelNeeded = boolean ? 
+    Math.ceil(totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap :
+    fuelPerLap * totalRaceLengthLaps;
 
-function calcTotalFuelNeededLaps(fuelNeededType) {
-    const fuelNeeded = fuelPerLap * totalRaceLengthLaps;
     fuelNeededResult.innerText = `${(fuelNeeded * (fuelNeededType ? toLitersConversion : 1)).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
 }
 
@@ -90,11 +95,11 @@ function runAllCalcs() {
     calcRaceLengthMins();
     if (raceLengthType) {
         calcRaceLengthLaps2Laps();
-        calcTotalFuelNeededLaps(fuelNeededType);
+        calcFuelTotalFuelNeeded (fuelNeededType, false)
         raceLengthTimeResult.innerText = `${totalRaceLengthLaps} Laps`;
     } else {
         calcRaceLengthLaps();
-        calcTotalFuelNeededTime(fuelNeededType);
+        calcFuelTotalFuelNeeded (fuelNeededType, true)
     }
     lapTimeElements.style.display = raceLengthType ? "none" : "block";
     raceLengthTimeElements.style.display = raceLengthType ? "none" : "block";
@@ -125,9 +130,11 @@ function convertLastCells () {
     for (let i = 0; i < allLastCells.length; i++) {
         let myArray = allLastCells[i].innerText.split(" ");
         let justNumber = +myArray[0];
+        
         fuelNeededType ? 
         allLastCells[i].innerText = `${(justNumber * toLitersConversion).toFixed(2)} Liters` :
         allLastCells[i].innerText = `${(justNumber * toGallonsConversion).toFixed(2)} Gallons`;
+        
         const deleteButton = document.createElement('div');
         deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
         deleteButton.classList.add('delete-button');
@@ -168,15 +175,14 @@ function deleteRow(button) {
 }
 
 runAllCalcs();
+
 initializeToggleTexts();
 
 document.querySelector("body").oninput = runAllCalcs;
-document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
-showFloatingValue('#race-length-hours-value', 'hour');
-showFloatingValue('#race-length-minutes-value', 'minute');
-showFloatingValue('#lap-time-minutes', 'minute');
-showFloatingValue('#lap-time-seconds', 'second');
+floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
+
+document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
 // improve code effeciency
 //create save in browser functionality

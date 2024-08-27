@@ -6,7 +6,6 @@ body {
     justify-content: center;
     background-color: #000;
     color: white;
-    filter: brightness(0.8)
 }   
 
 .alpha-container {
@@ -16,7 +15,7 @@ body {
     justify-content: center;
     text-align: center;
     position: relative;
-    width: max(2000px);
+    width: max(1800px);
 }
 
 h1 {
@@ -25,7 +24,7 @@ h1 {
     font-weight: 400;
     font-size: 8em;
     letter-spacing: -0.14em;
-    color: #333;
+    color: #222;
     rotate: -90deg;
     transform: skewX(-15deg);
     text-wrap: nowrap;
@@ -45,7 +44,7 @@ h1:hover {
     font-family: barlow;
     font-size: 1.5em;
     /* letter-spacing: -0.1em; */
-    color: #333;
+    color: #222;
     rotate: -90deg;
     transform: skewX(-15deg);
     text-wrap: nowrap;
@@ -127,9 +126,9 @@ h3 {
     height: var(--height);
     width: var(--height);
     background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border-radius: var(--border-radius);
-    transition: transform 0.2s;
+    transition: transform 0.2s ease-in;
 }
 
 .toggle__input:checked ~ .toggle__fill::after {
@@ -231,7 +230,7 @@ h3 {
     width: 180px;
     text-align: center;
     padding: 5px 10px;
-    background-color: rgba(46, 113, 220, 0.9);
+    background-color: rgba(46, 113, 220, 0.6);
     color: #fff;
     border-radius: 3px;
     border: 1px solid #63a2d4;
@@ -239,7 +238,7 @@ h3 {
     display: none;
     pointer-events: none;
     visibility: hidden;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(3px);
 }
 
 @media screen and (max-width: 800px) {
