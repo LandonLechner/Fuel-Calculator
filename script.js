@@ -1,10 +1,21 @@
 const toLitersConversion= 3.78541;
 const toGallonsConversion = 0.264172;
 
-let totalLapTimeSecs = 90;
-let fuelPerLap = 0.50
-let totalRaceLengthMins = 30;
-let totalRaceLengthLaps = 20;
+// let totalLapTimeSecs = 90;
+// let fuelPerLap = 0.50
+// let totalRaceLengthMins = 30;
+// let totalRaceLengthLaps = 20;
+
+//2. add selector to array
+function loadPrevValues () {
+    setTimeout(() => {
+    window.addEventListener('load', function() {
+      loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
+  });
+}, 0)
+};
+
+loadPrevValues();
 
 const raceLengthTimeText = document.querySelector("#race-length-time-text");
 const raceLengthLapsText = document.querySelector("#race-length-laps-text");
@@ -77,7 +88,7 @@ function calcFuelPerLap() {
     const fuelPerLapType = document.querySelector("#fuel-per-lap-type").checked;
     const fuelValue = +document.querySelector("#fuel-per-lap-value").value;
     //1. add local storage below user input element
-    localStorage.setItem("#fuel-per-lap-value", fuelValue);
+    // localStorage.setItem("#fuel-per-lap-value", fuelValue);
     fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
     fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType);
     fuelPerLap = fuelPerLapType ? fuelValue * toGallonsConversion : fuelValue;
@@ -191,16 +202,7 @@ function loadSavedElementTexts(elementIds) {
     });
 }
 
-//2. add selector to array
-function loadPrevValues () {
-    setTimeout(() => {
-    window.addEventListener('load', function() {
-      loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
-  });
-}, 4000)
-};
 
-loadPrevValues();
 
 runAllCalcs();
 
@@ -211,6 +213,8 @@ document.querySelector("body").oninput = runAllCalcs;
 floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
 
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
+
+localStorage.setItem("#fuel-per-lap-value", +document.querySelector("#fuel-per-lap-value").value);
 
 // improve code effeciency
 //create save in browser functionality
