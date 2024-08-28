@@ -255,7 +255,6 @@ function loadTableFromLocalStorage() {
 }
 
 window.addEventListener('load', function() {
-    loadPrevChecked();
     loadPrevValues();
     loadTableFromLocalStorage();
 });
