@@ -194,6 +194,7 @@ function loadPrevValues () {
         "#fuel-per-lap-type",
         "#fuel-needed-result-type"
     ]);
+    console.log("ran?")
 })};
 
 // 3. add functionality to make sure replacing value, or textContent, etc
@@ -254,14 +255,12 @@ function loadTableFromLocalStorage() {
     }
 }
 
-window.addEventListener('load', function() {
-    loadPrevValues();
-    loadTableFromLocalStorage();
-});
+loadPrevValues();
+loadTableFromLocalStorage();
 
 setTimeout(() => {
     runAllCalcs();
-    // initializeToggleTexts();
+    initializeToggleTexts();
 }, 5);
 
 document.querySelector("body").oninput = runAllCalcs;
