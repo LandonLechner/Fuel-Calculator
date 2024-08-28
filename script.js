@@ -65,6 +65,9 @@ function calcRaceLengthLaps2Laps () {
 function calcLapTime () {
     let lapTimeMins = +document.querySelector("#lap-time-minutes").value;
     let lapTimeSecs = +document.querySelector("#lap-time-seconds").value;
+     //1. add local storage below user input element
+    localStorage.setItem("#lap-time-minutes", lapTimeMins);
+    localStorage.setItem("#lap-time-seconds", lapTimeSecs);
     totalLapTimeSecs = lapTimeMins * 60 + lapTimeSecs;
     lapTimeDisplay.innerText = `${lapTimeMins}:${lapTimeSecs.toString().padStart(2, '0')}`;
     return totalLapTimeSecs;
@@ -73,6 +76,8 @@ function calcLapTime () {
 function calcFuelPerLap() {
     const fuelPerLapType = document.querySelector("#fuel-per-lap-type").checked;
     const fuelValue = +document.querySelector("#fuel-per-lap-value").value;
+    //1. add local storage below user input element
+    localStorage.setItem("#fuel-per-lap-value", fuelValue);
     fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
     fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType);
     fuelPerLap = fuelPerLapType ? fuelValue * toGallonsConversion : fuelValue;
@@ -134,7 +139,7 @@ function convertLastCells () {
         fuelNeededType ? 
         allLastCells[i].innerText = `${(justNumber * toLitersConversion).toFixed(2)} Liters` :
         allLastCells[i].innerText = `${(justNumber * toGallonsConversion).toFixed(2)} Gallons`;
-        
+
         const deleteButton = document.createElement('div');
         deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
         deleteButton.classList.add('delete-button');
@@ -173,6 +178,23 @@ function deleteRow(button) {
     const row = button.closest('tr');
     row.remove();
 }
+
+//3. add functionality to make sure replacing value, or textContent, etc
+function loadSavedElementTexts(elementIds) {
+    elementIds.forEach(elementId => {
+        const savedValue = localStorage.getItem(elementId);
+        if (savedValue !== null) {
+            document.querySelector(elementId).value = savedValue;
+            console.log(elementId)
+            console.log(savedValue)
+        }
+    });
+}
+
+//2. add selector to array
+window.addEventListener('load', function() {
+    loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
+});
 
 runAllCalcs();
 
