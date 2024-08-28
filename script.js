@@ -192,9 +192,15 @@ function loadSavedElementTexts(elementIds) {
 }
 
 //2. add selector to array
-window.addEventListener('load', function() {
+function loadPrevValues () {
+    setTimeout(() => {
+    window.addEventListener('load', function() {
       loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
-});
+  });
+}, 4000)
+};
+
+loadPrevValues();
 
 runAllCalcs();
 
