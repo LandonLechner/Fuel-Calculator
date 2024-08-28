@@ -6,6 +6,9 @@ let fuelPerLap;
 let totalRaceLengthMins;
 let totalRaceLengthLaps;
 
+loadPrevValues();
+loadTableFromLocalStorage();
+
 const raceLengthTimeText = document.querySelector("#race-length-time-text");
 const raceLengthLapsText = document.querySelector("#race-length-laps-text");
 const fuelPerLapGallonsText = document.querySelector("#fuel-per-lap-gallons-text");
@@ -194,7 +197,6 @@ function loadPrevValues () {
         "#fuel-per-lap-type",
         "#fuel-needed-result-type"
     ]);
-    console.log("ran?")
 })};
 
 // 3. add functionality to make sure replacing value, or textContent, etc
@@ -254,9 +256,6 @@ function loadTableFromLocalStorage() {
         });
     }
 }
-
-loadPrevValues();
-loadTableFromLocalStorage();
 
 setTimeout(() => {
     runAllCalcs();
