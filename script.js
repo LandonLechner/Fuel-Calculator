@@ -117,7 +117,7 @@ function runAllCalcs() {
     raceLengthTimeElements.style.display = raceLengthType ? "none" : "block";
     raceLengthLapsElements.style.display = raceLengthType ? "block" : "none";
     localStorage.setItem("#race-length-type", raceLengthType);
-    localStorage.setItem("#fuel-needed-result-type", ffuelNeededType);
+    localStorage.setItem("#fuel-needed-result-type", fuelNeededType);
 }
 
 function showFloatingValue(selector, type) {
