@@ -1,6 +1,8 @@
 const toLitersConversion= 3.78541;
 const toGallonsConversion = 0.264172;
 
+loadPrevValues();
+
 // let totalLapTimeSecs = 90;
 // let fuelPerLap = 0.50
 // let totalRaceLengthMins = 30;
@@ -10,12 +12,6 @@ let totalLapTimeSecs;
 let fuelPerLap;
 let totalRaceLengthMins;
 let totalRaceLengthLaps;
-
-//2. add selector to array
-function loadPrevValues () {
-    window.addEventListener('load', function() {
-      loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
-})};
 
 const raceLengthTimeText = document.querySelector("#race-length-time-text");
 const raceLengthLapsText = document.querySelector("#race-length-laps-text");
@@ -78,6 +74,8 @@ function calcLapTime () {
     let lapTimeSecs = +document.querySelector("#lap-time-seconds").value;
     totalLapTimeSecs = lapTimeMins * 60 + lapTimeSecs;
     lapTimeDisplay.innerText = `${lapTimeMins}:${lapTimeSecs.toString().padStart(2, '0')}`;
+    localStorage.setItem("#lap-time-minutes", +document.querySelector("#lap-time-minutes").value);
+    localStorage.setItem("#lap-time-seconds", +document.querySelector("#lap-time-seconds").value);
     return totalLapTimeSecs;
 }
 
@@ -87,6 +85,7 @@ function calcFuelPerLap() {
     fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
     fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType);
     fuelPerLap = fuelPerLapType ? fuelValue * toGallonsConversion : fuelValue;
+    localStorage.setItem("#fuel-per-lap-value", +document.querySelector("#fuel-per-lap-value").value);
     return fuelPerLap;
 }
 
@@ -185,7 +184,26 @@ function deleteRow(button) {
     row.remove();
 }
 
-//3. add functionality to make sure replacing value, or textContent, etc
+setTimeout(() => {
+    runAllCalcs();
+    console.log("I just ran runAllCalcs()")
+}, 5);
+
+initializeToggleTexts();
+
+document.querySelector("body").oninput = runAllCalcs;
+
+floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
+
+document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
+
+// 2. add selector to array
+function loadPrevValues () {
+    window.addEventListener('load', function() {
+      loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
+})};
+
+// 3. add functionality to make sure replacing value, or textContent, etc
 function loadSavedElementTexts(elementIds) {
     elementIds.forEach(elementId => {
         const savedValue = localStorage.getItem(elementId);
@@ -197,24 +215,3 @@ function loadSavedElementTexts(elementIds) {
     });
 }
 
-
-
-runAllCalcs();
-
-initializeToggleTexts();
-
-document.querySelector("body").oninput = runAllCalcs;
-
-floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
-
-document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
-
-loadPrevValues();
-
-localStorage.setItem("#fuel-per-lap-value", +document.querySelector("#fuel-per-lap-value").value);
-localStorage.setItem("#lap-time-minutes", +document.querySelector("#lap-time-minutes").value);
-localStorage.setItem("#lap-time-seconds", +document.querySelector("#lap-time-seconds").value);
-
-
-// improve code effeciency
-//create save in browser functionality
