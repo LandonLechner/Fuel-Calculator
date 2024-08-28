@@ -190,7 +190,9 @@ function deleteRow(button) {
 
 loadPrevValues();
 
-runAllCalcs();
+setTimeout(() => {
+    runAllCalcs();
+}, 5);
 
 initializeToggleTexts();
 
