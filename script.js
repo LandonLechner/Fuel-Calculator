@@ -27,8 +27,8 @@ const fuelNeededResult = document.querySelector("#fuel-needed-result");
 const lapTimeElements = document.querySelector(".lap-time-container");
 const allLastCells = document.getElementsByClassName("last-cell");
 
-let fuelNeededType = document.querySelector("#fuel-needed-result-type");
-let raceLengthType = document.querySelector("#race-length-type");
+// let fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
+// let raceLengthType = document.querySelector("#race-length-type").checked;
 
 const floatingValueText = [
     { selector: '#race-length-hours-value', unit: 'hour' },
@@ -194,7 +194,7 @@ loadPrevValues();
 setTimeout(() => {
     runAllCalcs();
     initializeToggleTexts();
-}, 5);
+}, 500);
 
 
 document.querySelector("body").oninput = runAllCalcs;
@@ -217,8 +217,11 @@ function loadPrevChecked () {
 function loadSavedElementChecked(elementIds) {
     elementIds.forEach(elementId => {
         const savedValue = localStorage.getItem(elementId);
+        const checkboxElement = document.querySelector(elementId);
         if (savedValue !== null) {
-            document.querySelector(elementId).checked = savedValue;
+            checkboxElement.checked = (savedValue === 'true');
+        } else {
+            checkboxElement.checked = false;
         }
     });
 }
@@ -241,8 +244,6 @@ function loadSavedElementValues(elementIds) {
         const savedValue = localStorage.getItem(elementId);
         if (savedValue !== null) {
             document.querySelector(elementId).value = savedValue;
-            console.log(elementId)
-            console.log(savedValue)
         }
     });
 }
