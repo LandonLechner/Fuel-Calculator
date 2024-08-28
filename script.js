@@ -268,9 +268,11 @@ function loadTableFromLocalStorage() {
     }
 }
 
-loadPrevChecked();
-loadPrevValues();
-loadTableFromLocalStorage();
+window.addEventListener('load', function() {
+    loadPrevChecked();
+    loadPrevValues();
+    loadTableFromLocalStorage();
+});
 
 setTimeout(() => {
     runAllCalcs();
