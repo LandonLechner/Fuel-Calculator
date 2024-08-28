@@ -1,8 +1,6 @@
 const toLitersConversion= 3.78541;
 const toGallonsConversion = 0.264172;
 
-loadPrevValues();
-
 // let totalLapTimeSecs = 90;
 // let fuelPerLap = 0.50
 // let totalRaceLengthMins = 30;
@@ -52,6 +50,8 @@ function calcRaceLengthMins () {
     totalRaceLengthMins = raceLengthHours * 60 + raceLengthMinutes;
     raceLengthDisplay.innerText = `${raceLengthHours}:${raceLengthMinutes.toString().padStart(2, '0')}`;
     raceLengthTimeResult.innerText = `${totalRaceLengthMins} Minutes`;
+    localStorage.setItem("#race-length-hours-value", raceLengthHours);
+    localStorage.setItem("#race-length-minutes-value", raceLengthMinutes);
     raceLengthTimeText.classList.toggle("color-gray", raceLengthType);
     raceLengthLapsText.classList.toggle("color-gray", !raceLengthType);
     return totalRaceLengthMins;
@@ -65,6 +65,7 @@ function calcRaceLengthLaps() {
     
 function calcRaceLengthLaps2Laps () {
     totalRaceLengthLaps = document.querySelector("#race-length-laps-value").value;
+    localStorage.setItem("#race-length-laps-value", totalRaceLengthLaps);
     raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
     return totalRaceLengthLaps; 
 }
@@ -74,8 +75,8 @@ function calcLapTime () {
     let lapTimeSecs = +document.querySelector("#lap-time-seconds").value;
     totalLapTimeSecs = lapTimeMins * 60 + lapTimeSecs;
     lapTimeDisplay.innerText = `${lapTimeMins}:${lapTimeSecs.toString().padStart(2, '0')}`;
-    localStorage.setItem("#lap-time-minutes", +document.querySelector("#lap-time-minutes").value);
-    localStorage.setItem("#lap-time-seconds", +document.querySelector("#lap-time-seconds").value);
+    localStorage.setItem("#lap-time-minutes", lapTimeMins);
+    localStorage.setItem("#lap-time-seconds", lapTimeSecs);
     return totalLapTimeSecs;
 }
 
@@ -85,7 +86,8 @@ function calcFuelPerLap() {
     fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
     fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType);
     fuelPerLap = fuelPerLapType ? fuelValue * toGallonsConversion : fuelValue;
-    localStorage.setItem("#fuel-per-lap-value", +document.querySelector("#fuel-per-lap-value").value);
+    localStorage.setItem("#fuel-per-lap-type", fuelPerLapType);
+    localStorage.setItem("#fuel-per-lap-value", fuelValue);
     return fuelPerLap;
 }
 
@@ -114,6 +116,8 @@ function runAllCalcs() {
     lapTimeElements.style.display = raceLengthType ? "none" : "block";
     raceLengthTimeElements.style.display = raceLengthType ? "none" : "block";
     raceLengthLapsElements.style.display = raceLengthType ? "block" : "none";
+    localStorage.setItem("#race-length-type", raceLengthType);
+    localStorage.setItem("#fuel-needed-result-type", ffuelNeededType);
 }
 
 function showFloatingValue(selector, type) {
@@ -184,10 +188,9 @@ function deleteRow(button) {
     row.remove();
 }
 
-setTimeout(() => {
-    runAllCalcs();
-    console.log("I just ran runAllCalcs()")
-}, 5);
+loadPrevValues();
+
+runAllCalcs();
 
 initializeToggleTexts();
 
@@ -200,11 +203,21 @@ document.querySelector("#fuel-needed-result-type").addEventListener('click', con
 // 2. add selector to array
 function loadPrevValues () {
     window.addEventListener('load', function() {
-      loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
+      loadSavedElementValues([
+        "#race-length-type",
+        "#race-length-hours-value", 
+        "#race-length-minutes-value", 
+        "#race-length-laps-value", 
+        "#fuel-per-lap-value",
+        "#fuel-per-lap-type", 
+        "#lap-time-minutes", 
+        "#lap-time-seconds",
+        "#fuel-needed-result-type"
+    ]);
 })};
 
 // 3. add functionality to make sure replacing value, or textContent, etc
-function loadSavedElementTexts(elementIds) {
+function loadSavedElementValues(elementIds) {
     elementIds.forEach(elementId => {
         const savedValue = localStorage.getItem(elementId);
         if (savedValue !== null) {
