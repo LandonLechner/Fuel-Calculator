@@ -27,8 +27,8 @@ const fuelNeededResult = document.querySelector("#fuel-needed-result");
 const lapTimeElements = document.querySelector(".lap-time-container");
 const allLastCells = document.getElementsByClassName("last-cell");
 
-let fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
-let raceLengthType = document.querySelector("#race-length-type").checked;
+let fuelNeededType = document.querySelector("#fuel-needed-result-type");
+let raceLengthType = document.querySelector("#race-length-type");
 
 const floatingValueText = [
     { selector: '#race-length-hours-value', unit: 'hour' },
@@ -193,9 +193,9 @@ loadPrevValues();
 
 setTimeout(() => {
     runAllCalcs();
+    initializeToggleTexts();
 }, 5);
 
-initializeToggleTexts();
 
 document.querySelector("body").oninput = runAllCalcs;
 
