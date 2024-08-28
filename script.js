@@ -17,8 +17,6 @@ function loadPrevValues () {
       loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
 })};
 
-loadPrevValues();
-
 const raceLengthTimeText = document.querySelector("#race-length-time-text");
 const raceLengthLapsText = document.querySelector("#race-length-laps-text");
 const fuelPerLapGallonsText = document.querySelector("#fuel-per-lap-gallons-text");
@@ -210,6 +208,8 @@ document.querySelector("body").oninput = runAllCalcs;
 floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
 
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
+
+loadPrevValues();
 
 localStorage.setItem("#fuel-per-lap-value", +document.querySelector("#fuel-per-lap-value").value);
 localStorage.setItem("#lap-time-minutes", +document.querySelector("#lap-time-minutes").value);
