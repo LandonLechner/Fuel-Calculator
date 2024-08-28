@@ -6,14 +6,16 @@ const toGallonsConversion = 0.264172;
 // let totalRaceLengthMins = 30;
 // let totalRaceLengthLaps = 20;
 
+let totalLapTimeSecs;
+let fuelPerLap;
+let totalRaceLengthMins;
+let totalRaceLengthLaps;
+
 //2. add selector to array
 function loadPrevValues () {
-    setTimeout(() => {
     window.addEventListener('load', function() {
       loadSavedElementTexts(["#fuel-per-lap-value", "#lap-time-minutes", "#lap-time-seconds"]);
-  });
-}, 0)
-};
+})};
 
 loadPrevValues();
 
@@ -76,9 +78,6 @@ function calcRaceLengthLaps2Laps () {
 function calcLapTime () {
     let lapTimeMins = +document.querySelector("#lap-time-minutes").value;
     let lapTimeSecs = +document.querySelector("#lap-time-seconds").value;
-     //1. add local storage below user input element
-    localStorage.setItem("#lap-time-minutes", lapTimeMins);
-    localStorage.setItem("#lap-time-seconds", lapTimeSecs);
     totalLapTimeSecs = lapTimeMins * 60 + lapTimeSecs;
     lapTimeDisplay.innerText = `${lapTimeMins}:${lapTimeSecs.toString().padStart(2, '0')}`;
     return totalLapTimeSecs;
@@ -87,8 +86,6 @@ function calcLapTime () {
 function calcFuelPerLap() {
     const fuelPerLapType = document.querySelector("#fuel-per-lap-type").checked;
     const fuelValue = +document.querySelector("#fuel-per-lap-value").value;
-    //1. add local storage below user input element
-    // localStorage.setItem("#fuel-per-lap-value", fuelValue);
     fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
     fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType);
     fuelPerLap = fuelPerLapType ? fuelValue * toGallonsConversion : fuelValue;
@@ -215,6 +212,9 @@ floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
 localStorage.setItem("#fuel-per-lap-value", +document.querySelector("#fuel-per-lap-value").value);
+localStorage.setItem("#lap-time-minutes", +document.querySelector("#lap-time-minutes").value);
+localStorage.setItem("#lap-time-seconds", +document.querySelector("#lap-time-seconds").value);
+
 
 // improve code effeciency
 //create save in browser functionality
