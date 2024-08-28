@@ -188,6 +188,7 @@ function deleteRow(button) {
     row.remove();
 }
 
+loadPrevChecked();
 loadPrevValues();
 
 setTimeout(() => {
@@ -203,18 +204,34 @@ floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
 document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
 // 2. add selector to array
+function loadPrevChecked () {
+    window.addEventListener('load', function() {
+      loadSavedElementChecked([
+        "#race-length-type",
+        "#fuel-per-lap-type",
+        "#fuel-needed-result-type"
+    ]);
+})};
+
+// 3. add functionality to make sure replacing value, or textContent, etc
+function loadSavedElementChecked(elementIds) {
+    elementIds.forEach(elementId => {
+        const savedValue = localStorage.getItem(elementId);
+        if (savedValue !== null) {
+            document.querySelector(elementId).checked = savedValue;
+        }
+    });
+}
+
 function loadPrevValues () {
     window.addEventListener('load', function() {
       loadSavedElementValues([
-        "#race-length-type",
         "#race-length-hours-value", 
         "#race-length-minutes-value", 
         "#race-length-laps-value", 
         "#fuel-per-lap-value",
-        "#fuel-per-lap-type", 
         "#lap-time-minutes", 
         "#lap-time-seconds",
-        "#fuel-needed-result-type"
     ]);
 })};
 
@@ -229,4 +246,3 @@ function loadSavedElementValues(elementIds) {
         }
     });
 }
-
