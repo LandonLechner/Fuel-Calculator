@@ -1,11 +1,6 @@
 const toLitersConversion= 3.78541;
 const toGallonsConversion = 0.264172;
 
-// let totalLapTimeSecs = 90;
-// let fuelPerLap = 0.50
-// let totalRaceLengthMins = 30;
-// let totalRaceLengthLaps = 20;
-
 let totalLapTimeSecs;
 let fuelPerLap;
 let totalRaceLengthMins;
@@ -26,9 +21,6 @@ const raceLengthLapsResult = document.querySelector("#race-length-laps-result");
 const fuelNeededResult = document.querySelector("#fuel-needed-result");
 const lapTimeElements = document.querySelector(".lap-time-container");
 const allLastCells = document.getElementsByClassName("last-cell");
-
-// let fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
-// let raceLengthType = document.querySelector("#race-length-type").checked;
 
 const floatingValueText = [
     { selector: '#race-length-hours-value', unit: 'hour' },
@@ -169,7 +161,7 @@ function addRow() {
         const newCell = newRow.insertCell(i);
         newCell.innerText = initialRow.cells[i].innerText;
     }
-    
+
     // Create a cell with a "Delete Row" button
     const lastCell = newRow.cells[newRow.cells.length - 1];
     lastCell.classList.add("last-cell");
@@ -180,28 +172,14 @@ function addRow() {
         deleteRow(this);
     };
     lastCell.appendChild(deleteButton);
-    
+    saveTableToLocalStorage();
 }
 
 function deleteRow(button) {
     const row = button.closest('tr');
     row.remove();
+    saveTableToLocalStorage();
 }
-
-loadPrevChecked();
-loadPrevValues();
-
-setTimeout(() => {
-    runAllCalcs();
-    initializeToggleTexts();
-}, 500);
-
-
-document.querySelector("body").oninput = runAllCalcs;
-
-floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
-
-document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
 
 // 2. add selector to array
 function loadPrevChecked () {
@@ -247,3 +225,60 @@ function loadSavedElementValues(elementIds) {
         }
     });
 }
+
+function saveTableToLocalStorage() {
+    const table = document.querySelector('.data-table tbody');
+    const rows = Array.from(table.rows).slice(1).map(row => { // Exclude the first row
+        return Array.from(row.cells).map(cell => cell.innerText);
+    });
+
+    // Save table rows to local storage
+    localStorage.setItem('tableData', JSON.stringify(rows));
+}
+
+function loadTableFromLocalStorage() {
+    const savedRows = JSON.parse(localStorage.getItem('tableData'));
+    if (savedRows) {
+        const table = document.querySelector('.data-table tbody');
+        
+        // Clear all rows except the first row
+        while (table.rows.length > 1) {
+            table.deleteRow(1);
+        }
+
+        // Populate table with saved rows
+        savedRows.forEach(rowData => {
+            const newRow = table.insertRow(); // Insert at the end
+            rowData.forEach(cellData => {
+                const newCell = newRow.insertCell();
+                newCell.innerText = cellData;
+            });
+
+            // Add the delete button to the last cell
+            const lastCell = newRow.cells[newRow.cells.length - 1];
+            lastCell.classList.add("last-cell");
+            const deleteButton = document.createElement('div');
+            deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
+            deleteButton.classList.add('delete-button');
+            deleteButton.onclick = function() {
+                deleteRow(this);
+            };
+            lastCell.appendChild(deleteButton);
+        });
+    }
+}
+
+loadPrevChecked();
+loadPrevValues();
+loadTableFromLocalStorage();
+
+setTimeout(() => {
+    runAllCalcs();
+    // initializeToggleTexts();
+}, 5);
+
+document.querySelector("body").oninput = runAllCalcs;
+
+floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
+
+document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
