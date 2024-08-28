@@ -181,29 +181,6 @@ function deleteRow(button) {
     saveTableToLocalStorage();
 }
 
-// 2. add selector to array
-function loadPrevChecked () {
-    window.addEventListener('load', function() {
-      loadSavedElementChecked([
-        "#race-length-type",
-        "#fuel-per-lap-type",
-        "#fuel-needed-result-type"
-    ]);
-})};
-
-// 3. add functionality to make sure replacing value, or textContent, etc
-function loadSavedElementChecked(elementIds) {
-    elementIds.forEach(elementId => {
-        const savedValue = localStorage.getItem(elementId);
-        const checkboxElement = document.querySelector(elementId);
-        if (savedValue !== null) {
-            checkboxElement.checked = (savedValue === 'true');
-        } else {
-            checkboxElement.checked = false;
-        }
-    });
-}
-
 function loadPrevValues () {
     window.addEventListener('load', function() {
       loadSavedElementValues([
@@ -213,6 +190,9 @@ function loadPrevValues () {
         "#fuel-per-lap-value",
         "#lap-time-minutes", 
         "#lap-time-seconds",
+        "#race-length-type",
+        "#fuel-per-lap-type",
+        "#fuel-needed-result-type"
     ]);
 })};
 
@@ -220,11 +200,17 @@ function loadPrevValues () {
 function loadSavedElementValues(elementIds) {
     elementIds.forEach(elementId => {
         const savedValue = localStorage.getItem(elementId);
-        if (savedValue !== null) {
-            document.querySelector(elementId).value = savedValue;
+        const element = document.querySelector(elementId);
+        if (savedValue !== null && element) {
+            if (element.type === 'checkbox') {
+                element.checked = (savedValue === 'true');
+            } else {
+                element.value = savedValue;
+            }
         }
     });
 }
+
 
 function saveTableToLocalStorage() {
     const table = document.querySelector('.data-table tbody');
