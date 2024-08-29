@@ -6,7 +6,7 @@ body {
     justify-content: center;
     background-color: #000;
     color: white;
-    /* accent-color:  #129ca1; */
+    accent-color:  #037ffc;
 }   
 
 .alpha-container {
@@ -33,7 +33,6 @@ h1 {
     top: 250px;
     margin: 0;
     filter: blur(4px);
-    transition: filter 1s;
 }
 
 h1:hover {
@@ -53,11 +52,14 @@ h1:hover {
     top: 250px;
     margin: 0;
     filter: blur(4px);
-    transition: filter 1s;
 }
 
 .author:hover {
     filter: blur(0px);
+}
+
+.transition {
+    transition: filter 1s linear;
 }
 
 .no-blur {
@@ -68,6 +70,10 @@ h3 {
     margin: 30px 50px 10px;
     font-size: 1.5em;
     font-weight: 100;
+}
+
+#race-length-title {
+    margin-top: 15px;
 }
 
 .under-slider-numbers {
@@ -164,7 +170,7 @@ h3 {
 }
 
 .results-container {
-    margin: 10px;
+    margin: 10px 10px 30px;
 }
 
 .data-table {
@@ -205,22 +211,23 @@ h3 {
     color: white;
     padding: 7px 30px;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 400;
     margin: 35px 0 0;
     cursor: pointer;
     border-radius: 3px;
     transition: background-color 0.3s, transform 0.3s;
+    transform: scale(0.95)
 }
 
 #add-to-results-button:hover {
     background-color: #be330d;
-    transform: scale(1.05);
+    transform: scale(1.0);
 }
 
 #add-to-results-button:active {
     background-color: #a62603;
-    transform: scale(0.95);
+    transform: scale(0.90);
 }
 
 .color-gray {
@@ -235,10 +242,10 @@ h3 {
     width: 180px;
     text-align: center;
     padding: 5px 10px;
-    background-color: rgba(46, 113, 220, 0.5);
+    background-color: rgba(3, 127, 252, 0.5);
     color: #fff;
     border-radius: 3px;
-    border: 1px solid #63a2d4;
+    border: 1px solid #85ace6;
     font-size: 2.2em;
     display: none;
     pointer-events: none;

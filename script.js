@@ -32,20 +32,22 @@ const floatingValueText = [
 
 
 
-function initializeToggleTexts () {
-    raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
-    raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
-    resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
-    resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
-}
-
 function initializeH1AuthorBlur () {
     document.querySelector('h1').classList.add('no-blur');
     document.querySelector('.author').classList.add('no-blur');
     setTimeout(() => {
         document.querySelector('h1').classList.remove('no-blur');
         document.querySelector('.author').classList.remove('no-blur');
+        document.querySelector('h1').classList.add('transition')
+        document.querySelector('.author').classList.add('transition');
     }, 1000);
+}
+
+function initializeToggleTexts () {
+    raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
+    raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
+    resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
+    resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
 }
 
 function runAllCalcs() {
