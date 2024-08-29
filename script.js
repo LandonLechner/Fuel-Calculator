@@ -29,11 +29,44 @@ const floatingValueText = [
     { selector: '#lap-time-seconds', unit: 'second' },
 ];
 
+
+
+
 function initializeToggleTexts () {
     raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
     raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
     resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
     resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
+}
+
+function initializeH1AuthorBlur () {
+    document.querySelector('h1').classList.add('no-blur');
+    document.querySelector('.author').classList.add('no-blur');
+    setTimeout(() => {
+        document.querySelector('h1').classList.remove('no-blur');
+        document.querySelector('.author').classList.remove('no-blur');
+    }, 1000);
+}
+
+function runAllCalcs() {
+    raceLengthType = document.querySelector("#race-length-type").checked;
+    fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
+    calcLapTime();
+    calcFuelPerLap();
+    calcRaceLengthMins();
+    if (raceLengthType) {
+        calcRaceLengthLaps2Laps();
+        calcFuelTotalFuelNeeded (fuelNeededType, false)
+        raceLengthTimeResult.innerText = `${totalRaceLengthLaps} Laps`;
+    } else {
+        calcRaceLengthLaps();
+        calcFuelTotalFuelNeeded (fuelNeededType, true)
+    }
+    lapTimeElements.style.display = raceLengthType ? "none" : "block";
+    raceLengthTimeElements.style.display = raceLengthType ? "none" : "block";
+    raceLengthLapsElements.style.display = raceLengthType ? "block" : "none";
+    localStorage.setItem("#race-length-type", raceLengthType);
+    localStorage.setItem("#fuel-needed-result-type", fuelNeededType);
 }
 
 function calcRaceLengthMins () {
@@ -91,26 +124,8 @@ function calcFuelTotalFuelNeeded (fuelNeededType, boolean) {
     fuelNeededResult.innerText = `${(fuelNeeded * (fuelNeededType ? toLitersConversion : 1)).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
 }
 
-function runAllCalcs() {
-    raceLengthType = document.querySelector("#race-length-type").checked;
-    fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
-    calcLapTime();
-    calcFuelPerLap();
-    calcRaceLengthMins();
-    if (raceLengthType) {
-        calcRaceLengthLaps2Laps();
-        calcFuelTotalFuelNeeded (fuelNeededType, false)
-        raceLengthTimeResult.innerText = `${totalRaceLengthLaps} Laps`;
-    } else {
-        calcRaceLengthLaps();
-        calcFuelTotalFuelNeeded (fuelNeededType, true)
-    }
-    lapTimeElements.style.display = raceLengthType ? "none" : "block";
-    raceLengthTimeElements.style.display = raceLengthType ? "none" : "block";
-    raceLengthLapsElements.style.display = raceLengthType ? "block" : "none";
-    localStorage.setItem("#race-length-type", raceLengthType);
-    localStorage.setItem("#fuel-needed-result-type", fuelNeededType);
-}
+
+
 
 function showFloatingValue(selector, type) {
     const inputElement = document.querySelector(selector);
@@ -128,6 +143,9 @@ function showFloatingValue(selector, type) {
     inputElement.addEventListener('touchend', hideFloatingValue);
     inputElement.addEventListener('mouseup', hideFloatingValue);
 }
+
+
+
 
 function convertLastCells () {
     fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
@@ -150,6 +168,9 @@ function convertLastCells () {
         allLastCells[i].appendChild(deleteButton);
     }
 }
+
+
+
 
 function addRow() {
     const table = document.querySelector('.data-table').getElementsByTagName('tbody')[0];
@@ -181,6 +202,9 @@ function deleteRow(button) {
     saveTableToLocalStorage();
 }
 
+
+
+
 function loadPrevValues () {
       loadSavedElementValues([
         "#race-length-hours-value", 
@@ -195,7 +219,6 @@ function loadPrevValues () {
     ]);
 };
 
-// 3. add functionality to make sure replacing value, or textContent, etc
 function loadSavedElementValues(elementIds) {
     elementIds.forEach(elementId => {
         const savedValue = localStorage.getItem(elementId);
@@ -209,7 +232,6 @@ function loadSavedElementValues(elementIds) {
         }
     });
 }
-
 
 function saveTableToLocalStorage() {
     const table = document.querySelector('.data-table tbody');
@@ -253,10 +275,14 @@ function loadTableFromLocalStorage() {
     }
 }
 
+
+
+
 loadPrevValues();
 loadTableFromLocalStorage();
 runAllCalcs();
 initializeToggleTexts();
+initializeH1AuthorBlur();
 
 document.querySelector("body").oninput = runAllCalcs;
 

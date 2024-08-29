@@ -6,6 +6,7 @@ body {
     justify-content: center;
     background-color: #000;
     color: white;
+    /* accent-color:  #129ca1; */
 }   
 
 .alpha-container {
@@ -39,24 +40,28 @@ h1:hover {
     filter: blur(0px);
 }
 
-#author {
+.author {
     position: absolute;
     font-family: barlow;
     font-size: 1.5em;
-    /* letter-spacing: -0.1em; */
+    letter-spacing: 0.5em;
     color: #222;
     rotate: -90deg;
     transform: skewX(-15deg);
     text-wrap: nowrap;
-    left: 6px;
-    top: 158px;
+    left: -95px;
+    top: 250px;
     margin: 0;
-    filter: opacity(100%) blur(4px);
+    filter: blur(4px);
     transition: filter 1s;
 }
 
-#author:hover {
-    filter: opacity(100%) blur(0px);
+.author:hover {
+    filter: blur(0px);
+}
+
+.no-blur {
+    filter: blur(0px);
 }
 
 h3 {
@@ -246,7 +251,7 @@ h3 {
         z-index: -10;
     }
 
-    #author {
+    .author {
         visibility: hidden;
     }
 
