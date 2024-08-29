@@ -6,9 +6,6 @@ let fuelPerLap;
 let totalRaceLengthMins;
 let totalRaceLengthLaps;
 
-loadPrevValues();
-loadTableFromLocalStorage();
-
 const raceLengthTimeText = document.querySelector("#race-length-time-text");
 const raceLengthLapsText = document.querySelector("#race-length-laps-text");
 const fuelPerLapGallonsText = document.querySelector("#fuel-per-lap-gallons-text");
@@ -185,7 +182,6 @@ function deleteRow(button) {
 }
 
 function loadPrevValues () {
-    window.addEventListener('load', function() {
       loadSavedElementValues([
         "#race-length-hours-value", 
         "#race-length-minutes-value", 
@@ -197,7 +193,7 @@ function loadPrevValues () {
         "#fuel-per-lap-type",
         "#fuel-needed-result-type"
     ]);
-})};
+};
 
 // 3. add functionality to make sure replacing value, or textContent, etc
 function loadSavedElementValues(elementIds) {
@@ -257,10 +253,10 @@ function loadTableFromLocalStorage() {
     }
 }
 
-setTimeout(() => {
-    runAllCalcs();
-    initializeToggleTexts();
-}, 5);
+loadPrevValues();
+loadTableFromLocalStorage();
+runAllCalcs();
+initializeToggleTexts();
 
 document.querySelector("body").oninput = runAllCalcs;
 
