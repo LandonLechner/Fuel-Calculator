@@ -40,7 +40,7 @@ function initializeH1AuthorBlur () {
         document.querySelector('.author').classList.remove('no-blur');
         document.querySelector('h1').classList.add('transition')
         document.querySelector('.author').classList.add('transition');
-    }, 1000);
+    }, 2000);
 }
 
 function initializeToggleTexts () {
