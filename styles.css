@@ -1,3 +1,7 @@
+html * {
+    -webkit-font-smoothing: antialiased;
+}
+
 body { 
     margin: 0; 
     box-sizing: border-box;
@@ -69,7 +73,7 @@ h1:hover {
 h3 {
     margin: 30px 50px 10px;
     font-size: 1.5em;
-    font-weight: 100;
+    font-weight: 200;
 }
 
 #race-length-title {
@@ -183,7 +187,7 @@ h3 {
 }
 
 .data-table th {
-    font-weight: 100;
+    font-weight: 200;
     font-size: 1.3em;
 }
 
@@ -266,3 +270,12 @@ h3 {
         visibility: visible;
     }
 }
+
+@media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-touch-callout: none) {
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+  }
