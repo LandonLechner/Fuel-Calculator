@@ -8,8 +8,8 @@ body {
     font-family: barlow, arial;
     display: flex;
     justify-content: center;
-    background-color: #eee;
-    color: #000;
+    background-color: #000;
+    color: #fff;
     accent-color:  #037ffc;
     margin-bottom: 10px;
 }   
