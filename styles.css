@@ -1,6 +1,6 @@
-html * {
+/* html * {
     -webkit-font-smoothing: antialiased;
-}
+} */
 
 body { 
     margin: 0; 
@@ -8,9 +8,10 @@ body {
     font-family: barlow, arial;
     display: flex;
     justify-content: center;
-    background-color: #000;
-    color: white;
+    background-color: #eee;
+    color: #000;
     accent-color:  #037ffc;
+    margin-bottom: 10px;
 }   
 
 .alpha-container {
@@ -141,7 +142,7 @@ h3 {
     height: var(--height);
     width: var(--height);
     background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
     border-radius: var(--border-radius);
     transition: transform 0.2s ease-in;
 }
@@ -271,11 +272,11 @@ h3 {
     }
 }
 
-@media not all and (min-resolution: 0.001dpcm) {
+/* @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-touch-callout: none) {
         body {
             background-color: #fff;
             color: #000;
         }
     }
-  }
+  } */
