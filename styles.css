@@ -278,6 +278,10 @@ h3 {
     .value-indicator {
         visibility: visible;
     }
+
+    .kofi-button {
+        margin: 40px 0;
+    }
 }
 
 /* @media not all and (min-resolution: 0.001dpcm) {
