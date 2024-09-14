@@ -12,13 +12,14 @@ body {
     color: #fff;
     accent-color:  #037ffc;
     margin-bottom: 10px;
+    min-height: 100vh;
 }   
 
 .alpha-container {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     position: relative;
     width: max(1800px);
@@ -175,7 +176,7 @@ h3 {
 }
 
 .results-container {
-    margin: 10px 10px 30px;
+    margin: 10px 10px 50px;
 }
 
 .data-table {
@@ -256,6 +257,13 @@ h3 {
     pointer-events: none;
     visibility: hidden;
     backdrop-filter: blur(3px);
+}
+
+.kofi-button {
+    position: absolute;
+    bottom: 10px;
+    right: calc(50% - 113px);
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 800px) {
