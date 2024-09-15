@@ -7,22 +7,26 @@ body {
     box-sizing: border-box;
     font-family: barlow, arial;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     background-color: #000;
     color: #fff;
     accent-color:  #037ffc;
     margin-bottom: 10px;
-    min-height: 100vh;
 }   
 
 .alpha-container {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     text-align: center;
     position: relative;
     width: max(1800px);
+    /* min-height: calc(100vh - 10px); */
+}
+
+.all-but-h1 {
+    min-height: calc(100vh - 60px);
 }
 
 h1 {
@@ -259,11 +263,13 @@ h3 {
     backdrop-filter: blur(3px);
 }
 
-.kofi-button {
-    position: absolute;
-    bottom: 10px;
+.btn-container {
+    /* position: absolute;
+    bottom: 10px; */
     right: calc(50% - 113px);
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    /* display: flex;
+    justify-content: flex-end; */
 }
 
 @media screen and (max-width: 800px) {
@@ -279,8 +285,8 @@ h3 {
         visibility: visible;
     }
 
-    .kofi-button {
-        margin: 50px 0 20px;
+    .btn-container {
+        margin: -40px 0 25px;
     }
 }
 
