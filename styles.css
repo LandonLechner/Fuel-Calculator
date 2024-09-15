@@ -11,6 +11,7 @@ body {
     color: #fff;
     accent-color:  #037ffc;
     margin-bottom: 10px;
+
 }   
 
 .alpha-container {
@@ -23,7 +24,8 @@ body {
 }
 
 .all-but-h1 {
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 100px);
+    margin-bottom: 50px;
 }
 
 h1 {
@@ -177,7 +179,7 @@ h3 {
 }
 
 .results-container {
-    margin: 10px 10px 50px;
+    margin: 10px 10px 30px;
 }
 
 .data-table {
@@ -278,7 +280,7 @@ h3 {
     }
 
     .btn-container {
-        margin: -40px 0 25px;
+        margin: -60px 0 25px;
     }
 }
 
