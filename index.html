@@ -69,31 +69,34 @@
                 </section>
                 <button id="add-to-results-button" onclick="addRow()">Save Results & Add Row</button>
                 <section class="results-container">
-                <h3>Results</h3>
-                <div>
-                    <div id="results-gallons-text" class="toggle-text">Gallons</div> 
-                    <label class="toggle">
-                        <input id="fuel-needed-result-type" class="toggle__input" type="checkbox" unchecked>
-                        <div class="toggle__fill"></div>
-                    </label>
-                    <div id="results-liters-text" class="toggle-text">Liters</div>
-                </div>
-                <table class="data-table" id="results-title-container">
-                    <thead>
-                      <tr>
-                        <th class="results-label">Race Length</th>
-                        <th class="results-label">Total Laps</th>
-                        <th class="results-label">Fuel Needed</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-            		    <td id="race-length-time-result" class="results-data"></td>
-            		    <td id="race-length-laps-result" class="results-data"></td>
-            		    <td id="fuel-needed-result" class="results-data"></td>
-                      </tr>
-                    </tbody>
-                </table>
+                    <h3>Results</h3>
+                    <div>
+                        <div id="results-gallons-text" class="toggle-text">Gallons</div> 
+                        <label class="toggle">
+                            <input id="fuel-needed-result-type" class="toggle__input" type="checkbox" unchecked>
+                            <div class="toggle__fill"></div>
+                        </label>
+                        <div id="results-liters-text" class="toggle-text">Liters</div>
+                    </div>
+                    <table class="data-table" id="results-title-container">
+                        <thead>
+                            <tr>
+                                <th class="results-label">Race Length</th>
+                                <th class="results-label">Total Laps</th>
+                                <th class="results-label">Fuel Needed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="race-length-time-result" class="results-data"></td>
+                                <td id="race-length-laps-result" class="results-data"></td>
+                                <td id="fuel-needed-result" class="results-data"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Note: I recommend rounding up to the nearest liter,
+                    <br>
+                    and I also suggest adding an extra liter for waiting on the grid.</p>
     		</section>
 		</div>
         <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('ko-fi.com/landonlechner', '#1656e0', 'K3K1OSCDZ');kofiwidget2.draw();</script> 
