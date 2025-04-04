@@ -12,6 +12,7 @@ body {
     accent-color:  #037ffc;
     margin-bottom: 10px;
     justify-content: center;
+    text-wrap: balance;
 
 }   
 
@@ -189,7 +190,7 @@ h3 {
     width: 100%;
     padding: 4px 15px;
     text-align: center;
-    min-width: 400px;
+    min-width: 345px;
 }
 
 .data-table th {
