@@ -31,7 +31,6 @@ const floatingValueText = [
 
 
 
-
 function initializeH1AuthorBlur () {
     document.querySelector('h1').classList.add('no-blur');
     document.querySelector('.author').classList.add('no-blur');
@@ -118,15 +117,19 @@ function calcFuelPerLap() {
     return fuelPerLap;
 }
 
-function calcFuelTotalFuelNeeded (fuelNeededType, boolean) {
-    const fuelNeeded = boolean ? 
+function calcFuelTotalFuelNeeded (fuelNeededType, boolean) { 
+    const rounding = document.querySelector("#rounding").checked
+    let fuelNeeded = boolean ? 
     Math.ceil(totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap :
     fuelPerLap * totalRaceLengthLaps;
-
-    fuelNeededResult.innerText = `${(fuelNeeded * (fuelNeededType ? toLitersConversion : 1)).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
+    
+    if (rounding) {
+        fuelNeededResult.innerText = `${Math.ceil((fuelNeeded * (fuelNeededType ? toLitersConversion : 1)))} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
+    } else {
+        fuelNeededResult.innerText = `${(fuelNeeded * (fuelNeededType ? toLitersConversion : 1)).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
+    }
+    localStorage.setItem("#rounding", rounding);
 }
-
-
 
 
 function showFloatingValue(selector, type) {
@@ -158,8 +161,8 @@ function convertLastCells () {
         let justNumber = +myArray[0];
         
         fuelNeededType ? 
-        allLastCells[i].innerText = `${(justNumber * toLitersConversion).toFixed(2)} Liters` :
-        allLastCells[i].innerText = `${(justNumber * toGallonsConversion).toFixed(2)} Gallons`;
+            allLastCells[i].innerText = `${(justNumber * toLitersConversion).toFixed(2)} Liters` :
+            allLastCells[i].innerText = `${(justNumber * toGallonsConversion).toFixed(2)} Gallons`;
 
         const deleteButton = document.createElement('div');
         deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
@@ -217,7 +220,8 @@ function loadPrevValues () {
         "#lap-time-seconds",
         "#race-length-type",
         "#fuel-per-lap-type",
-        "#fuel-needed-result-type"
+        "#fuel-needed-result-type",
+        "#rounding"
     ]);
 };
 

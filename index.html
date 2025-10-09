@@ -13,8 +13,8 @@
             <h1>Fuel Calculator</h1>
             <div class="author">by  Landon  Lechner</div>
             <div class="all-but-h1">
-            <section id="race-length-container">
-                <h3 id="race-length-title">Race Length</h3>
+                <section id="race-length-container">
+                    <h3 id="race-length-title">Race Length</h3>
                     <div id="race-length-time-text" class="toggle-text">Time</div>
                     <label class="toggle">
                         <input id="race-length-type" class="toggle__input" type="checkbox" unchecked>
@@ -95,10 +95,21 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>Note: I recommend rounding up to the nearest liter,
-                    <br>
-                    and I also suggest adding an extra liter for waiting on the grid.</p>
-    		</section>
+                </section>
+                <section id="rounding-section">
+                    <div class="toggle-text">Round up to the nearest integer</div>
+                    <label class="toggle" id="rounding-toggle-label">
+                        <input id="rounding"class="toggle__input" type="checkbox" unchecked>
+                        <div class="toggle__fill"></div>
+                    </label>
+                    <!-- <div class="toggle-text">Rounding Point</div>
+                    <input id="rounding-point" class="number-box" type="number" value="0.50" step="0.01" min="0.01" max="0.99"> -->
+                </section>
+                <p>Note: I recommend rounding up to the nearest integer,
+                <br>
+                and be sure to add extra fuel for waiting on the grid 
+                <br>
+                or for the formation lap.</p>
 		</div>
         <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('ko-fi.com/landonlechner', '#1656e0', 'K3K1OSCDZ');kofiwidget2.draw();</script> 
     </div>

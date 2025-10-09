@@ -176,7 +176,7 @@ h3 {
 
 .number-box {
     width: 70px;
-    margin-top: 8px;
+    margin: 8px 4px 0;
     font-size: 1.1em;
 }
 
@@ -266,6 +266,16 @@ h3 {
 
 .btn-container {
     right: calc(50% - 113px);
+}
+
+#rounding-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#rounding-toggle-label {
+    margin: 2px 20px 2px 4px;
 }
 
 @media screen and (max-width: 700px) {
