@@ -1,11 +1,6 @@
 const toLitersConversion= 3.78541;
 const toGallonsConversion = 0.264172;
 
-let totalLapTimeSecs;
-let fuelPerLap;
-let totalRaceLengthMins;
-let totalRaceLengthLaps;
-
 const raceLengthTimeText = document.querySelector("#race-length-time-text");
 const raceLengthLapsText = document.querySelector("#race-length-laps-text");
 const fuelPerLapGallonsText = document.querySelector("#fuel-per-lap-gallons-text");
@@ -18,9 +13,12 @@ const raceLengthTimeElements = document.querySelector(".race-length-time-element
 const raceLengthLapsElements = document.querySelector(".race-length-laps-elements");
 const raceLengthTimeResult = document.querySelector("#race-length-time-result");
 const raceLengthLapsResult = document.querySelector("#race-length-laps-result");
-const fuelNeededResult = document.querySelector("#fuel-needed-result");
 const lapTimeElements = document.querySelector(".lap-time-container");
-const allLastCells = document.getElementsByClassName("last-cell");
+
+const table = document.querySelector('tbody');
+
+let totalRaceLengthMins;
+let totalRaceLengthLaps;
 
 const floatingValueText = [
     { selector: '#race-length-hours-value', unit: 'hour' },
@@ -29,20 +27,16 @@ const floatingValueText = [
     { selector: '#lap-time-seconds', unit: 'second' },
 ];
 
-
-
-function initializeH1AuthorBlur () {
-    document.querySelector('h1').classList.add('no-blur');
-    document.querySelector('.author').classList.add('no-blur');
+function initializeH1AuthorBlur() {
+    const titleAuthor = ['h1', '.author'];
+    titleAuthor.forEach(el => document.querySelector(el).classList.add('no-blur'));
     setTimeout(() => {
-        document.querySelector('h1').classList.remove('no-blur');
-        document.querySelector('.author').classList.remove('no-blur');
-        document.querySelector('h1').classList.add('transition')
-        document.querySelector('.author').classList.add('transition');
+        titleAuthor.forEach(el => document.querySelector(el).classList.remove('no-blur'));
+        titleAuthor.forEach(el => document.querySelector(el).classList.add('transition'));
     }, 2000);
 }
 
-function initializeToggleTexts () {
+function initializeToggleTexts() {
     raceLengthTimeText.classList.toggle("color-gray", fuelNeededType);
     raceLengthLapsText.classList.toggle("color-gray", !fuelNeededType);
     resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
@@ -52,153 +46,124 @@ function initializeToggleTexts () {
 function runAllCalcs() {
     raceLengthType = document.querySelector("#race-length-type").checked;
     fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
+    lapTimeMins = +document.querySelector("#lap-time-minutes").value;
+    lapTimeSecs = +document.querySelector("#lap-time-seconds").value
+    fuelPerLapType = document.querySelector("#fuel-per-lap-type").checked;
+    fuelValue = +document.querySelector("#fuel-per-lap-value").value;
+    raceLengthHours = +document.querySelector("#race-length-hours-value").value;
+    raceLengthMinutes = +document.querySelector("#race-length-minutes-value").value;
+    totalRaceLengthLaps = document.querySelector("#race-length-laps-value").value;  
+    rounding = document.querySelector("#rounding").checked
+    
     calcLapTime();
     calcFuelPerLap();
     calcRaceLengthMins();
-    if (raceLengthType) {
-        calcRaceLengthLaps2Laps();
-        calcFuelTotalFuelNeeded (fuelNeededType, false)
-        raceLengthTimeResult.innerText = `${totalRaceLengthLaps} Laps`;
-    } else {
-        calcRaceLengthLaps();
-        calcFuelTotalFuelNeeded (fuelNeededType, true)
-    }
+    raceLengthType ? calcRaceLengthLaps2Laps() : calcRaceLengthLaps();
+    calcFuelFirstRow();
+    
+    resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
+    resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
+    fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
+    fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType); 
+    raceLengthTimeText.classList.toggle("color-gray", raceLengthType);
+    raceLengthLapsText.classList.toggle("color-gray", !raceLengthType);
+    
     lapTimeElements.style.display = raceLengthType ? "none" : "block";
     raceLengthTimeElements.style.display = raceLengthType ? "none" : "block";
     raceLengthLapsElements.style.display = raceLengthType ? "block" : "none";
-    localStorage.setItem("#race-length-type", raceLengthType);
-    localStorage.setItem("#fuel-needed-result-type", fuelNeededType);
+    
+    const localStorageMap = {
+        "#race-length-type": raceLengthType,
+        "#fuel-needed-result-type": fuelNeededType,
+        "#lap-time-minutes": lapTimeMins,
+        "#lap-time-seconds": lapTimeSecs,
+        "#fuel-per-lap-type": fuelPerLapType,
+        "#fuel-per-lap-value": fuelValue,
+        "#race-length-hours-value": raceLengthHours,
+        "#race-length-minutes-value": raceLengthMinutes,
+        "#rounding": rounding        
+    }
+    for (const [key, value] of Object.entries(localStorageMap)) {
+        localStorage.setItem(key, value);
+    }
 }
 
-function calcRaceLengthMins () {
-    let raceLengthHours = +document.querySelector("#race-length-hours-value").value;
-    let raceLengthMinutes = +document.querySelector("#race-length-minutes-value").value;
+function calcLapTime () {
+    totalLapTimeSecs = lapTimeMins * 60 + lapTimeSecs;
+    lapTimeDisplay.innerText = `${lapTimeMins}:${lapTimeSecs.toString().padStart(2, '0')}`;
+    return totalLapTimeSecs;
+}
+
+function calcFuelPerLap() {
+    fuelPerLap = fuelPerLapType ? fuelValue: fuelValue * toLitersConversion;
+    return fuelPerLap;
+}
+
+function calcRaceLengthMins () { 
     totalRaceLengthMins = raceLengthHours * 60 + raceLengthMinutes;
     raceLengthDisplay.innerText = `${raceLengthHours}:${raceLengthMinutes.toString().padStart(2, '0')}`;
     raceLengthTimeResult.innerText = `${totalRaceLengthMins} Minutes`;
-    localStorage.setItem("#race-length-hours-value", raceLengthHours);
-    localStorage.setItem("#race-length-minutes-value", raceLengthMinutes);
-    raceLengthTimeText.classList.toggle("color-gray", raceLengthType);
-    raceLengthLapsText.classList.toggle("color-gray", !raceLengthType);
     return totalRaceLengthMins;
 }
 
 function calcRaceLengthLaps() {
     totalRaceLengthLaps = Math.ceil((totalRaceLengthMins * 60) / totalLapTimeSecs);
     raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
-    return totalRaceLengthLaps; 
+    fuelNeeded = Math.ceil(totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap
+    return fuelNeeded;
 }
     
 function calcRaceLengthLaps2Laps () {
-    totalRaceLengthLaps = document.querySelector("#race-length-laps-value").value;
     localStorage.setItem("#race-length-laps-value", totalRaceLengthLaps);
     raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
-    return totalRaceLengthLaps; 
+    raceLengthTimeResult.innerText = `${totalRaceLengthLaps} Laps`;
+    fuelNeeded = fuelPerLap * totalRaceLengthLaps
+    return fuelNeeded;
 }
 
-function calcLapTime () {
-    let lapTimeMins = +document.querySelector("#lap-time-minutes").value;
-    let lapTimeSecs = +document.querySelector("#lap-time-seconds").value;
-    totalLapTimeSecs = lapTimeMins * 60 + lapTimeSecs;
-    lapTimeDisplay.innerText = `${lapTimeMins}:${lapTimeSecs.toString().padStart(2, '0')}`;
-    localStorage.setItem("#lap-time-minutes", lapTimeMins);
-    localStorage.setItem("#lap-time-seconds", lapTimeSecs);
-    return totalLapTimeSecs;
+function calcLastCell(num) {
+    lastCellText = table.rows[num].cells[2];
+    fuelConverted = (fuelNeededType ? 1 : toGallonsConversion) * fuelNeeded;
+    lastCellFuel = rounding ? Math.ceil(fuelConverted) : fuelConverted.toFixed(2);
+    return lastCellText.innerText = `${lastCellFuel} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
 }
 
-function calcFuelPerLap() {
-    const fuelPerLapType = document.querySelector("#fuel-per-lap-type").checked;
-    const fuelValue = +document.querySelector("#fuel-per-lap-value").value;
-    fuelPerLapGallonsText.classList.toggle('color-gray',fuelPerLapType);
-    fuelPerLapLitersText.classList.toggle('color-gray',!fuelPerLapType);
-    fuelPerLap = fuelPerLapType ? fuelValue * toGallonsConversion : fuelValue;
-    localStorage.setItem("#fuel-per-lap-type", fuelPerLapType);
-    localStorage.setItem("#fuel-per-lap-value", fuelValue);
-    return fuelPerLap;
+function calcFuelFirstRow() {
+    table.rows[0].setAttribute('data-fuel', fuelNeeded)
+    calcLastCell(0);
 }
 
-function calcFuelTotalFuelNeeded (fuelNeededType, boolean) { 
-    const rounding = document.querySelector("#rounding").checked
-    let fuelNeeded = boolean ? 
-    Math.ceil(totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap :
-    fuelPerLap * totalRaceLengthLaps;
-    
-    if (rounding) {
-        fuelNeededResult.innerText = `${Math.ceil((fuelNeeded * (fuelNeededType ? toLitersConversion : 1)))} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
-    } else {
-        fuelNeededResult.innerText = `${(fuelNeeded * (fuelNeededType ? toLitersConversion : 1)).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
-    }
-    localStorage.setItem("#rounding", rounding);
-}
-
-
-function showFloatingValue(selector, type) {
-    const inputElement = document.querySelector(selector);
-    const floatingDiv = document.querySelector(`${selector} ~ div`);
-
-    inputElement.addEventListener('input', (event) => {
-        floatingDiv.textContent = `${event.target.value} ${type}${event.target.value == 1 ? "" : "s"}`;
-        floatingDiv.style.display = 'block';
-    });
-
-    const hideFloatingValue = () => {
-        floatingDiv.style.display = 'none';
-    };
-
-    inputElement.addEventListener('touchend', hideFloatingValue);
-    inputElement.addEventListener('mouseup', hideFloatingValue);
-}
-
-
-
-
-function convertLastCells () {
-    fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
-    resultsGallonsText.classList.toggle("color-gray", fuelNeededType);
-    resultsLitersText.classList.toggle("color-gray", !fuelNeededType);
-    for (let i = 0; i < allLastCells.length; i++) {
-        let myArray = allLastCells[i].innerText.split(" ");
-        let justNumber = +myArray[0];
-        
-        fuelNeededType ? 
-            allLastCells[i].innerText = `${(justNumber * toLitersConversion).toFixed(2)} Liters` :
-            allLastCells[i].innerText = `${(justNumber * toGallonsConversion).toFixed(2)} Gallons`;
-
+function calcFuelOtherRows() {
+    runAllCalcs();
+    //Loop to Calculate rows 2+
+    for (let i = 1; i < table.rows.length; i++) {
+        fuelNeeded = table.rows[i].getAttribute('data-fuel')
+        calcLastCell(i);
+        //Add Delete icon & functionality
+        lastCellText.classList.add("last-cell");
         const deleteButton = document.createElement('div');
         deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
         deleteButton.classList.add('delete-button');
         deleteButton.onclick = function() {
             deleteRow(this);
         };
-        allLastCells[i].appendChild(deleteButton);
+        lastCellText.appendChild(deleteButton);
     }
+    saveTableToLocalStorage();
 }
 
-
-
-
 function addRow() {
-    const table = document.querySelector('.data-table').getElementsByTagName('tbody')[0];
+    const table = document.getElementsByTagName('tbody')[0];
     const initialRow = table.rows[0];
-    const newRow = table.insertRow(1); // Insert the new row right after the initial row
-    
-    // Copy each cell's data from the initial row to the new row
-    for (let i = 0; i < initialRow.cells.length; i++) {
-        const newCell = newRow.insertCell(i);
-        newCell.innerText = initialRow.cells[i].innerText;
+    const newRow = table.insertRow(1);
+    // Copy first two cell's data from the initial row to the new row 
+    for (let i = 0; i < 2; i++) { 
+        newRow.insertCell(i).innerText = initialRow.cells[i].innerText;
     }
-
-    // Create a cell with a "Delete Row" button
-    const lastCell = newRow.cells[newRow.cells.length - 1];
-    lastCell.classList.add("last-cell");
-    const deleteButton = document.createElement('div');
-    deleteButton.innerHTML = `<img src="delete_icon.png" width="13" height="13">`;
-    deleteButton.classList.add('delete-button');
-    deleteButton.onclick = function() {
-        deleteRow(this);
-    };
-    lastCell.appendChild(deleteButton);
-    saveTableToLocalStorage();
+    newRow.insertCell(2);
+    table.rows[1].setAttribute('data-fuel', +table.rows[0].getAttribute('data-fuel'));
+    //Perform the actual Calculation & add text/delete icon to cell
+    calcFuelOtherRows();
 }
 
 function deleteRow(button) {
@@ -207,11 +172,38 @@ function deleteRow(button) {
     saveTableToLocalStorage();
 }
 
+function showFloatingValue(selector, type) {
+    const inputElement = document.querySelector(selector);
+    const floatingDiv = document.querySelector(`${selector} ~ div`);
+    //Add text to and make div visible
+    inputElement.addEventListener('input', (event) => {
+        floatingDiv.textContent = `${event.target.value} ${type}${event.target.value == 1 ? "" : "s"}`;
+        floatingDiv.style.display = 'block';
+    });
+    //Hide div function
+    const hideFloatingValue = () => {
+        floatingDiv.style.display = 'none';
+    };
+    //Perform function on touchend/mouseup
+    ['touchend', 'mouseup'].forEach(el => inputElement.addEventListener(el, hideFloatingValue));
+}
 
 
+function saveTableToLocalStorage() {
+    const table = document.querySelector('.data-table tbody');
+   
+    const rows = Array.from(table.rows).slice(1).map(row => {
+        const rowData = Array.from(row.cells).map(cell => cell.innerText);
+        const dataAttributeValue = row.getAttribute('data-fuel');
+        rowData[3] = dataAttributeValue;
+        return rowData;
+    });
+    localStorage.setItem('tableData', JSON.stringify(rows));
+}
 
-function loadPrevValues () {
-      loadSavedElementValues([
+
+function loadLocalStorage() {
+    const localStorageItems = [
         "#race-length-hours-value", 
         "#race-length-minutes-value", 
         "#race-length-laps-value", 
@@ -222,11 +214,8 @@ function loadPrevValues () {
         "#fuel-per-lap-type",
         "#fuel-needed-result-type",
         "#rounding"
-    ]);
-};
-
-function loadSavedElementValues(elementIds) {
-    elementIds.forEach(elementId => {
+    ];
+    localStorageItems.forEach(elementId => {
         const savedValue = localStorage.getItem(elementId);
         const element = document.querySelector(elementId);
         if (savedValue !== null && element) {
@@ -237,37 +226,22 @@ function loadSavedElementValues(elementIds) {
             }
         }
     });
-}
-
-function saveTableToLocalStorage() {
-    const table = document.querySelector('.data-table tbody');
-    const rows = Array.from(table.rows).slice(1).map(row => { // Exclude the first row
-        return Array.from(row.cells).map(cell => cell.innerText);
-    });
-
-    // Save table rows to local storage
-    localStorage.setItem('tableData', JSON.stringify(rows));
-}
-
-function loadTableFromLocalStorage() {
+    //Load table
     const savedRows = JSON.parse(localStorage.getItem('tableData'));
     if (savedRows) {
         const table = document.querySelector('.data-table tbody');
-        
-        // Clear all rows except the first row
-        while (table.rows.length > 1) {
-            table.deleteRow(1);
-        }
-
         // Populate table with saved rows
         savedRows.forEach(rowData => {
-            const newRow = table.insertRow(); // Insert at the end
-            rowData.forEach(cellData => {
-                const newCell = newRow.insertCell();
-                newCell.innerText = cellData;
-            });
-
-            // Add the delete button to the last cell
+            const newRow = table.insertRow();
+            for (let i = 0; i < 4; i++) {
+                if (i !== 3) {
+                    const newCell = newRow.insertCell();
+                    newCell.innerText = rowData[i];
+                } else {
+                    newRow.setAttribute('data-fuel', rowData[i])
+                }
+            }
+            //Add Delete icon & functionality   
             const lastCell = newRow.cells[newRow.cells.length - 1];
             lastCell.classList.add("last-cell");
             const deleteButton = document.createElement('div');
@@ -281,11 +255,7 @@ function loadTableFromLocalStorage() {
     }
 }
 
-
-
-
-loadPrevValues();
-loadTableFromLocalStorage();
+loadLocalStorage();
 runAllCalcs();
 initializeToggleTexts();
 initializeH1AuthorBlur();
@@ -294,4 +264,6 @@ document.querySelector("body").oninput = runAllCalcs;
 
 floatingValueText.forEach(el => showFloatingValue(el.selector, el.unit));
 
-document.querySelector("#fuel-needed-result-type").addEventListener('click', convertLastCells);
+document.querySelector("#add-to-results-button").addEventListener('click', addRow);
+document.querySelector("#fuel-needed-result-type").addEventListener('click', calcFuelOtherRows);
+document.querySelector("#rounding").addEventListener('click', calcFuelOtherRows);
