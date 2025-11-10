@@ -97,14 +97,20 @@
                     </table>
                 </section>
                 <section id="rounding-section">
-                    <div class="toggle-text">Round up to the nearest integer</div>
+                    <span class="toggle-text">Round Up</span>
                     <label class="toggle" id="rounding-toggle-label">
                         <input id="rounding"class="toggle__input" type="checkbox" unchecked>
                         <div class="toggle__fill"></div>
                     </label>
-                    <!-- <div class="toggle-text">Rounding Point</div>
-                    <input id="rounding-point" class="number-box" type="number" value="0.50" step="0.01" min="0.01" max="0.99"> -->
                 </section>
+                <div id="extra-section">
+                    <div class="slider-container">
+                        <span>Add An Extra</span>
+                        <input id="extra-fuel" class="slider" type="range" min="0" max="3" value="0" step="0.05">
+                        <div class="value-indicator"></div>
+                        <span id="extra-fuel-text">Liters</span>
+                    </div>
+                </div>
                 <p>Note: I recommend rounding up to the nearest integer,
                 <br>
                 and be sure to add extra fuel for waiting on the grid 

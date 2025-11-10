@@ -78,13 +78,17 @@ h1:hover {
 }
 
 h3 {
-    margin: 30px 50px 10px;
+    margin: 33px 50px 10px;
     font-size: 1.5em;
     font-weight: 200;
 }
 
 #race-length-title {
     margin-top: 15px;
+}
+
+#race-length-hours-text, #race-length-minutes-text {
+    transform: translateY(-3px);
 }
 
 .under-slider-numbers {
@@ -102,7 +106,7 @@ h3 {
     width: 66px;
     display: inline-block;
     text-align: right;
-    transform: translateY(-7px);
+    transform: translateY(-3px);
     font-size: 1.1em;
 }
 
@@ -171,21 +175,22 @@ h3 {
 }
 
 .slider-top {
-    margin: 10px 0;
+    margin: 10px 0 6px;
 }
 
 .number-box {
     width: 70px;
     margin: 8px 4px 0;
     font-size: 1.1em;
+    height: 18px;
 }
 
 .results-container {
-    margin: 10px 10px 30px;
+    margin: 10px 10px 25px;
 }
 
 .data-table {
-    margin-top: 4px;
+    margin-top: 6px;
     border-collapse: collapse;
     width: 100%;
     padding: 4px 15px;
@@ -220,25 +225,25 @@ h3 {
     background-color: #de3a0d;
     border: none;
     color: white;
-    padding: 7px 30px;
+    padding: 8px 30px;
     text-align: center;
     font-size: 1.3em;
     font-weight: 400;
     margin: 35px 0 0;
     cursor: pointer;
     border-radius: 3px;
-    transition: background-color 0.3s, transform 0.3s;
-    transform: scale(0.95)
+    transition: background-color 0.25s linear, transform 0.25s linear;
+    transform: scale(0.95);
 }
 
 #add-to-results-button:hover {
-    background-color: #be330d;
+    background-color: #bc320c;
     transform: scale(1.0);
 }
 
 #add-to-results-button:active {
-    background-color: #a62603;
-    transform: scale(0.90);
+    background-color: #bc320c;
+    transform: scale(0.95);
 }
 
 .color-gray {
@@ -250,7 +255,7 @@ h3 {
     position: absolute;
     bottom: 60px;
     right: calc(50% - 90px);
-    width: 180px;
+    width: 190px;
     text-align: center;
     padding: 5px 10px;
     background-color: rgba(3, 127, 252, 0.5);
@@ -272,10 +277,26 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 #rounding-toggle-label {
     margin: 2px 20px 2px 4px;
+}
+
+#extra-fuel {
+    width: 100px;
+    transform: translateY(3px);
+}
+
+#extra-section {
+    transform: translateY(-5px);
+}
+
+#extra-fuel-text {
+    display: inline-block;
+    width: 95px;
+    text-align: left;
 }
 
 @media screen and (max-width: 700px) {
