@@ -27,7 +27,7 @@ body {
 
 .all-but-h1 {
     min-height: calc(100vh - 100px);
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 h1 {
@@ -270,7 +270,7 @@ h3 {
 }
 
 .btn-container {
-    right: calc(50% - 113px);
+    margin-top: 20px;
 }
 
 #rounding-section {
@@ -285,7 +285,7 @@ h3 {
 }
 
 #extra-fuel {
-    width: 100px;
+    width: 180px;
     transform: translateY(3px);
 }
 
@@ -313,7 +313,7 @@ h3 {
     }
 
     .btn-container {
-        margin: -60px 0 25px;
+        margin: -10px 0 25px;
     }
 }
 

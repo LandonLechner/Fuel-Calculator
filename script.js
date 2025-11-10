@@ -147,7 +147,8 @@ function showFloatingValue(selector, type) {
     const floatingDiv = document.querySelector(`${selector} ~ div`);
     //Add text to and make div visible
     inputElement.addEventListener('input', (e) => {
-        if (e.currentTarget.id !== '#extra-fuel') {
+        console.log(e.currentTarget.id);
+        if (e.currentTarget.id === 'extra-fuel') {
             floatingDiv.textContent = `${Number(e.target.value).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
             floatingDiv.style.display = 'block';
         } else {
