@@ -4,7 +4,6 @@ const raceLengthDisplay = document.querySelector("#race-length-display");
 const lapTimeDisplay = document.querySelector("#lap-time-display");
 const extraFuelText = document.querySelector("#extra-fuel-text");
 const table = document.querySelector('tbody');
-let extraFuel;
 
 const floatingValueText = [
     { selector: '#race-length-hours-value', unit: 'hour' },
@@ -16,8 +15,8 @@ const floatingValueText = [
 
 function runAllCalcs() {
     let totalRaceLengthLaps = +document.querySelector("#race-length-laps-value").value;  
-    extraFuel = +document.querySelector("#extra-fuel").value;
     const fuelPerLapType = document.querySelector("#fuel-per-lap-type").checked;
+    extraFuel = +document.querySelector("#extra-fuel").value;
     raceLengthType = document.querySelector("#race-length-type").checked;
     fuelNeededType = document.querySelector("#fuel-needed-result-type").checked;
     lapTimeMins = +document.querySelector("#lap-time-minutes").value;
@@ -39,20 +38,20 @@ function runAllCalcs() {
      
     if (raceLengthType) {
         //Calculate fuel needed & set race length text laps to laps
-        fuelNeeded = fuelPerLap * totalRaceLengthLaps;
+        fuelNeeded = (fuelPerLap * totalRaceLengthLaps) + extraFuel;
         raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
         raceLengthTimeResult.innerText = `${totalRaceLengthLaps} Laps`;
     } else {
         //Calculate fuel needed & set race length text mins/sec to laps
         totalRaceLengthLaps = Math.ceil((totalRaceLengthMins * 60) / totalLapTimeSecs);
-        fuelNeeded = Math.ceil(totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap;
+        fuelNeeded = Math.ceil((totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap) + extraFuel;
         raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
     }
 
     //Set data-fuel atttribute with fuel needed in liters
     table.rows[0].setAttribute('data-fuel', fuelNeeded)
     
-    calcLastCell(0, extraFuel);
+    calcLastCell(0);
 
     const toggleGrayWhiteText = {
         "#results-gallons-text": fuelNeededType,
@@ -84,13 +83,12 @@ function runAllCalcs() {
     }
     for (const [key, value] of Object.entries(localStorageMap))
         localStorage.setItem(key, value);
-    return extraFuel;
 }
 
-function calcLastCell(num, extraFuel) {
+function calcLastCell(num) {
     lastCellText = table.rows[num].cells[2];
     fuelConverted = (fuelNeededType ? 1 : 0.264172) * fuelNeeded;
-    lastCellFuel = rounding ? Math.ceil(fuelConverted + extraFuel) : (fuelConverted + extraFuel).toFixed(2);
+    lastCellFuel = rounding ? Math.ceil(fuelConverted) : fuelConverted.toFixed(2);
     return lastCellText.innerText = `${lastCellFuel} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
 }
 
@@ -99,7 +97,7 @@ function calcFuelOtherRows() {
     //Loop to Calculate rows 2+
     for (let i = 1; i < table.rows.length; i++) {
         fuelNeeded = +table.rows[i].getAttribute('data-fuel');
-        calcLastCell(i, extraFuel);
+        calcLastCell(i);
         //Add Delete icon & functionality
         lastCellText.classList.add("last-cell");
         const deleteButton = document.createElement('div');
@@ -147,7 +145,6 @@ function showFloatingValue(selector, type) {
     const floatingDiv = document.querySelector(`${selector} ~ div`);
     //Add text to and make div visible
     inputElement.addEventListener('input', (e) => {
-        console.log(e.currentTarget.id);
         if (e.currentTarget.id === 'extra-fuel') {
             floatingDiv.textContent = `${Number(e.target.value).toFixed(2)} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
             floatingDiv.style.display = 'block';
