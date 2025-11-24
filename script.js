@@ -44,7 +44,7 @@ function runAllCalcs() {
     } else {
         //Calculate fuel needed & set race length text mins/sec to laps
         totalRaceLengthLaps = Math.ceil((totalRaceLengthMins * 60) / totalLapTimeSecs);
-        fuelNeeded = Math.ceil((totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap) + extraFuel;
+        fuelNeeded = ((totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap) + extraFuel;
         raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
     }
 
@@ -88,6 +88,7 @@ function runAllCalcs() {
 function calcLastCell(num) {
     lastCellText = table.rows[num].cells[2];
     fuelConverted = (fuelNeededType ? 1 : 0.264172) * fuelNeeded;
+    console.log(rounding, fuelConverted)
     lastCellFuel = rounding ? Math.ceil(fuelConverted) : fuelConverted.toFixed(2);
     return lastCellText.innerText = `${lastCellFuel} ${fuelNeededType ? 'Liters' : 'Gallons'}`;
 }
