@@ -44,7 +44,7 @@ function runAllCalcs() {
     } else {
         //Calculate fuel needed & set race length text mins/sec to laps
         totalRaceLengthLaps = Math.ceil((totalRaceLengthMins * 60) / totalLapTimeSecs);
-        fuelNeeded = ((totalRaceLengthMins * 60 / totalLapTimeSecs) * fuelPerLap) + extraFuel;
+        fuelNeeded = (fuelPerLap * totalRaceLengthLaps) + extraFuel;
         raceLengthLapsResult.innerText = `${totalRaceLengthLaps} Laps`;
     }
 
